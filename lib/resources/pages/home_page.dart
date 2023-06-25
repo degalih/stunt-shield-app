@@ -54,7 +54,7 @@ class _HomePageState extends NyState<HomePage> {
                 Text("Protect Child, Protect The Future",
                         textAlign: TextAlign.center)
                     .titleMedium(context)
-                    .setColor(context, (color) => color.primaryAccent),
+                    .setColor(context, (color) => color.green),
                 Text(
                   "Build something amazing 💡",
                 ).bodyMedium(context).alignCenter(),
@@ -71,7 +71,7 @@ class _HomePageState extends NyState<HomePage> {
                       padding:
                           EdgeInsets.symmetric(horizontal: 16, vertical: 16),
                       decoration: BoxDecoration(
-                          color: ThemeColor.get(context).surfaceBackground,
+                          color: ThemeColor.get(context).white,
                           borderRadius: BorderRadius.circular(8),
                           boxShadow: [
                             BoxShadow(
@@ -90,8 +90,9 @@ class _HomePageState extends NyState<HomePage> {
                             MaterialButton(
                               child: Text(
                                 "documentation".tr().capitalize(),
-                              ).bodyLarge(context).setColor(
-                                  context, (color) => color.surfaceContent),
+                              )
+                                  .bodyLarge(context)
+                                  .setColor(context, (color) => color.black),
                               onPressed: widget.controller.onTapDocumentation,
                             ),
                             Divider(
@@ -100,8 +101,9 @@ class _HomePageState extends NyState<HomePage> {
                             MaterialButton(
                               child: Text(
                                 "GitHub",
-                              ).bodyLarge(context).setColor(
-                                  context, (color) => color.surfaceContent),
+                              )
+                                  .bodyLarge(context)
+                                  .setColor(context, (color) => color.black),
                               onPressed: widget.controller.onTapGithub,
                             ),
                             Divider(
@@ -110,8 +112,9 @@ class _HomePageState extends NyState<HomePage> {
                             MaterialButton(
                               child: Text(
                                 "changelog".tr().capitalize(),
-                              ).bodyLarge(context).setColor(
-                                  context, (color) => color.surfaceContent),
+                              )
+                                  .bodyLarge(context)
+                                  .setColor(context, (color) => color.black),
                               onPressed: widget.controller.onTapChangeLog,
                             ),
                             Divider(
@@ -120,8 +123,9 @@ class _HomePageState extends NyState<HomePage> {
                             MaterialButton(
                               child: Text(
                                 "YouTube Channel".tr().capitalize(),
-                              ).bodyLarge(context).setColor(
-                                  context, (color) => color.surfaceContent),
+                              )
+                                  .bodyLarge(context)
+                                  .setColor(context, (color) => color.black),
                               onPressed: widget.controller.onTapYouTube,
                             ),
                           ],

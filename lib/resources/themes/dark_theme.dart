@@ -18,40 +18,37 @@ ThemeData darkTheme(ColorStyles color) {
       getAppTextTheme(appFont, defaultTextTheme.merge(_textTheme(color)));
   return ThemeData(
     useMaterial3: true,
-    primaryColor: color.primaryContent,
-    primaryColorDark: color.primaryContent,
-    focusColor: color.primaryContent,
-    scaffoldBackgroundColor: color.background,
+    primaryColor: color.green,
+    primaryColorDark: color.green,
+    focusColor: color.green50,
+    scaffoldBackgroundColor: color.dark100,
     appBarTheme: AppBarTheme(
-        backgroundColor: color.appBarBackground,
-        titleTextStyle:
-            darkTheme.titleLarge!.copyWith(color: color.appBarPrimaryContent),
-        iconTheme: IconThemeData(color: color.appBarPrimaryContent),
+        backgroundColor: color.dark100,
+        titleTextStyle: darkTheme.titleLarge!.copyWith(color: color.white),
+        iconTheme: IconThemeData(color: color.white),
         elevation: 1.0,
         systemOverlayStyle: SystemUiOverlayStyle.light),
     buttonTheme: ButtonThemeData(
-      buttonColor: color.primaryAccent,
-      colorScheme: ColorScheme.light(primary: color.buttonBackground),
+      buttonColor: color.green,
+      colorScheme: ColorScheme.light(primary: color.green),
     ),
     textButtonTheme: TextButtonThemeData(
-      style: TextButton.styleFrom(foregroundColor: color.primaryContent),
+      style: TextButton.styleFrom(foregroundColor: color.green),
     ),
     elevatedButtonTheme: ElevatedButtonThemeData(
       style: TextButton.styleFrom(
-          foregroundColor: color.buttonPrimaryContent,
-          backgroundColor: color.buttonBackground),
+          foregroundColor: color.green, backgroundColor: color.green),
     ),
     bottomNavigationBarTheme: BottomNavigationBarThemeData(
-      backgroundColor: color.bottomTabBarBackground,
-      unselectedIconTheme:
-          IconThemeData(color: color.bottomTabBarIconUnselected),
-      selectedIconTheme: IconThemeData(color: color.bottomTabBarIconSelected),
-      unselectedLabelStyle: TextStyle(color: color.bottomTabBarLabelUnselected),
-      selectedLabelStyle: TextStyle(color: color.bottomTabBarLabelSelected),
-      selectedItemColor: color.bottomTabBarLabelSelected,
+      backgroundColor: color.green600,
+      unselectedIconTheme: IconThemeData(color: color.white),
+      selectedIconTheme: IconThemeData(color: color.green),
+      unselectedLabelStyle: TextStyle(color: color.white),
+      selectedLabelStyle: TextStyle(color: color.green),
+      selectedItemColor: color.green,
     ),
     textTheme: darkTheme,
-    colorScheme: ColorScheme.dark(background: color.background),
+    colorScheme: ColorScheme.dark(background: color.dark100),
   );
 }
 
@@ -62,7 +59,7 @@ ThemeData darkTheme(ColorStyles color) {
 */
 
 TextTheme _textTheme(ColorStyles colors) {
-  Color primaryContent = colors.primaryContent;
+  Color primaryContent = colors.white;
   TextTheme textTheme = TextTheme().apply(displayColor: primaryContent);
   return textTheme.copyWith(
       titleLarge: TextStyle(color: primaryContent.withOpacity(0.8)),
