@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_app/config/theme.dart';
 import '/config/font.dart';
 import '/resources/themes/styles/color_styles.dart';
 import '/resources/themes/text_theme/default_text_theme.dart';
@@ -20,44 +19,41 @@ ThemeData lightTheme(ColorStyles color) {
 
   return ThemeData(
     useMaterial3: true,
-    primaryColor: color.primaryContent,
-    primaryColorLight: color.primaryAccent,
-    focusColor: color.primaryContent,
-    scaffoldBackgroundColor: color.background,
-    hintColor: color.primaryAccent,
-    dividerTheme: DividerThemeData(color: Colors.grey[100]),
+    primaryColor: color.green,
+    primaryColorLight: color.green,
+    focusColor: color.green,
+    scaffoldBackgroundColor: color.white,
+    hintColor: color.blue,
+    dividerTheme: DividerThemeData(color: color.grey600),
     appBarTheme: AppBarTheme(
-      backgroundColor: color.appBarBackground,
-      titleTextStyle:
-          lightTheme.titleLarge!.copyWith(color: color.appBarPrimaryContent),
-      iconTheme: IconThemeData(color: color.appBarPrimaryContent),
+      backgroundColor: color.green,
+      titleTextStyle: lightTheme.titleLarge!.copyWith(color: color.white),
+      iconTheme: IconThemeData(color: color.grey600),
       elevation: 1.0,
       systemOverlayStyle: SystemUiOverlayStyle.dark,
     ),
     buttonTheme: ButtonThemeData(
-      buttonColor: color.buttonPrimaryContent,
-      colorScheme: ColorScheme.light(primary: color.buttonBackground),
+      buttonColor: color.green,
+      colorScheme: ColorScheme.light(primary: color.green),
     ),
     textButtonTheme: TextButtonThemeData(
-      style: TextButton.styleFrom(foregroundColor: color.primaryContent),
+      style: TextButton.styleFrom(foregroundColor: color.white),
     ),
     elevatedButtonTheme: ElevatedButtonThemeData(
       style: TextButton.styleFrom(
-          foregroundColor: color.buttonPrimaryContent,
-          backgroundColor: color.buttonBackground),
+          foregroundColor: color.white, backgroundColor: color.green),
     ),
     bottomNavigationBarTheme: BottomNavigationBarThemeData(
-      backgroundColor: color.bottomTabBarBackground,
-      unselectedIconTheme:
-          IconThemeData(color: color.bottomTabBarIconUnselected),
-      selectedIconTheme: IconThemeData(color: color.bottomTabBarIconSelected),
-      unselectedLabelStyle: TextStyle(color: color.bottomTabBarLabelUnselected),
-      selectedLabelStyle: TextStyle(color: color.bottomTabBarLabelSelected),
-      selectedItemColor: color.bottomTabBarLabelSelected,
+      backgroundColor: color.green50,
+      unselectedIconTheme: IconThemeData(color: color.grey600),
+      selectedIconTheme: IconThemeData(color: color.green),
+      unselectedLabelStyle: TextStyle(color: color.grey600),
+      selectedLabelStyle: TextStyle(color: color.green),
+      selectedItemColor: color.green,
     ),
     textTheme: lightTheme,
-    colorScheme: ColorScheme.light(
-        background: color.background, primary: lightColors.primaryAccent),
+    colorScheme:
+        ColorScheme.light(background: color.white, primary: color.green),
   );
 }
 
@@ -68,7 +64,7 @@ ThemeData lightTheme(ColorStyles color) {
 */
 
 TextTheme _textTheme(ColorStyles colors) {
-  Color primaryContent = colors.primaryContent;
+  Color primaryContent = colors.black;
   TextTheme textTheme = TextTheme().apply(displayColor: primaryContent);
   return textTheme.copyWith(
       labelLarge: TextStyle(color: primaryContent.withOpacity(0.8)));
