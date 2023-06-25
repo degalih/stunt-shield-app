@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:nylo_framework/nylo_framework.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 class Logo extends StatelessWidget {
   const Logo({Key? key, this.height, this.width}) : super(key: key);
@@ -8,10 +8,12 @@ class Logo extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Image.asset(
-      getImageAsset("nylo_logo.png"),
-      height: height ?? 100,
-      width: width ?? 100,
-    );
+    return SvgPicture.network(
+        'https://res.cloudinary.com/stunt-shield-cloudinary/image/upload/v1687706123/Stunt%20Shield%20App%20Assets/logo-with-tagline_g5j7hk.svg',
+        height: height ?? 224,
+        width: width ?? 105,
+        placeholderBuilder: (BuildContext context) => Container(
+            padding: const EdgeInsets.all(30.0),
+            child: const CircularProgressIndicator()));
   }
 }
