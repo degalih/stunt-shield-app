@@ -1,0 +1,21 @@
+                  // Column(
+                  //   crossAxisAlignment: CrossAxisAlignment.center,
+                  //   mainAxisAlignment: MainAxisAlignment.start,
+                  //   children: <Widget>[
+                  //     Divider(),
+                  //     Text(
+                  //       "Framework Version: $nyloVersion",
+                  //     ).bodyMedium(context),
+                  //     Switch(
+                  //         value: _darkMode,
+                  //         onChanged: (value) {
+                  //           _darkMode = value;
+                  //           NyTheme.set(context,
+                  //               id: getEnv(_darkMode == true
+                  //                   ? 'DARK_THEME_ID'
+                  //                   : 'LIGHT_THEME_ID'));
+                  //           setState(() {});
+                  //         }),
+                  //     Text("${_darkMode == true ? "Dark" : "Light"} Mode"),
+                  //   ],
+                  // ),
