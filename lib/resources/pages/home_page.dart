@@ -1,11 +1,15 @@
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_app/app/models/web_view_target.dart';
 import 'package:flutter_app/bootstrap/extensions.dart';
+import 'package:flutter_app/bootstrap/helpers.dart';
+import 'package:flutter_app/resources/pages/web_view_page.dart';
+import 'package:flutter_app/resources/themes/text_theme/default_text_theme.dart';
 import 'package:flutter_app/resources/widgets/logo_widget.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import '/app/controllers/home_controller.dart';
-import '/bootstrap/helpers.dart';
 import '/resources/widgets/safearea_widget.dart';
 import 'package:nylo_framework/nylo_framework.dart';
-import 'package:nylo_framework/theme/helper/ny_theme.dart';
 
 class HomePage extends NyStatefulWidget {
   HomePage({Key? key}) : super(key: key);
@@ -30,127 +34,107 @@ class _HomePageState extends NyState<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text("Hello World".tr()),
-        centerTitle: true,
-        actions: [
-          IconButton(
-            onPressed: widget.controller.showAbout,
-            icon: Icon(Icons.info_outline),
-          ),
-        ],
-      ),
       body: SafeAreaWidget(
         child: SingleChildScrollView(
           child: Center(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
-                Logo(),
-                Text(
-                  getEnv("APP_NAME"),
-                ).displayMedium(context),
-                Text("Protect Child, Protect The Future",
-                        textAlign: TextAlign.center)
-                    .titleMedium(context)
-                    .setColor(context, (color) => color.green),
-                Text(
-                  "Build something amazing 💡",
-                ).bodyMedium(context).alignCenter(),
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: <Widget>[
-                    Divider(),
-                    Container(
-                      height: 250,
-                      width: double.infinity,
-                      margin:
-                          EdgeInsets.symmetric(horizontal: 16, vertical: 16),
-                      padding:
-                          EdgeInsets.symmetric(horizontal: 16, vertical: 16),
-                      decoration: BoxDecoration(
-                          color: ThemeColor.get(context).white,
-                          borderRadius: BorderRadius.circular(8),
-                          boxShadow: [
-                            BoxShadow(
-                              color: Colors.grey.withOpacity(0.1),
-                              spreadRadius: 1,
-                              blurRadius: 9,
-                              offset:
-                                  Offset(0, 3), // changes position of shadow
-                            ),
-                          ]),
-                      child: Center(
-                        child: ListView(
-                          padding: EdgeInsets.zero,
-                          shrinkWrap: true,
-                          children: [
-                            MaterialButton(
-                              child: Text(
-                                "documentation".tr().capitalize(),
-                              )
-                                  .bodyLarge(context)
-                                  .setColor(context, (color) => color.black),
-                              onPressed: widget.controller.onTapDocumentation,
-                            ),
-                            Divider(
-                              height: 0,
-                            ),
-                            MaterialButton(
-                              child: Text(
-                                "GitHub",
-                              )
-                                  .bodyLarge(context)
-                                  .setColor(context, (color) => color.black),
-                              onPressed: widget.controller.onTapGithub,
-                            ),
-                            Divider(
-                              height: 0,
-                            ),
-                            MaterialButton(
-                              child: Text(
-                                "changelog".tr().capitalize(),
-                              )
-                                  .bodyLarge(context)
-                                  .setColor(context, (color) => color.black),
-                              onPressed: widget.controller.onTapChangeLog,
-                            ),
-                            Divider(
-                              height: 0,
-                            ),
-                            MaterialButton(
-                              child: Text(
-                                "YouTube Channel".tr().capitalize(),
-                              )
-                                  .bodyLarge(context)
-                                  .setColor(context, (color) => color.black),
-                              onPressed: widget.controller.onTapYouTube,
-                            ),
-                          ],
-                        ),
-                      ),
+            child: Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  Logo(),
+                  SvgPicture.network(
+                      'https://res.cloudinary.com/stunt-shield-cloudinary/image/upload/v1687707417/Stunt%20Shield%20App%20Assets/toodler-ilus_moqji2.svg',
+                      placeholderBuilder: (BuildContext context) => Container(
+                          padding: const EdgeInsets.all(30.0),
+                          child: const CircularProgressIndicator())),
+                  SizedBox(height: 32),
+                  Text('Selamat Datang!').displayMedium(context),
+                  Text("Bergabunglah dengan kami sekarang buat akun atau masuk",
+                          textAlign: TextAlign.center)
+                      .bodySmall(context)
+                      .setColor(
+                          context,
+                          (color) =>
+                              _darkMode == true ? color.grey50 : color.grey600),
+                  SizedBox(
+                    height: 32.0,
+                  ),
+                  ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                        elevation: 2.0,
+                        minimumSize: const Size.fromHeight(50),
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(8.0))),
+                    onPressed: () {},
+                    child: Text(
+                      'Masuk',
+                      style: defaultTextTheme.labelLarge,
                     ),
-                    Text(
-                      "Framework Version: $nyloVersion",
-                    )
-                        .bodyMedium(context)
-                        .setColor(context, (color) => Colors.grey),
-                    Switch(
-                        value: _darkMode,
-                        onChanged: (value) {
-                          _darkMode = value;
-                          NyTheme.set(context,
-                              id: getEnv(_darkMode == true
-                                  ? 'DARK_THEME_ID'
-                                  : 'LIGHT_THEME_ID'));
-                          setState(() {});
-                        }),
-                    Text("${_darkMode == true ? "Dark" : "Light"} Mode"),
-                  ],
-                ),
-              ],
+                  ),
+                  SizedBox(height: 16.0),
+                  OutlinedButton(
+                    style: OutlinedButton.styleFrom(
+                        minimumSize: const Size.fromHeight(50),
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(8.0))),
+                    onPressed: () {},
+                    child: Text(
+                      'Daftar',
+                      style: defaultTextTheme.labelLarge,
+                    ),
+                  ),
+                  SizedBox(
+                    height: 16.0,
+                  ),
+                  RichText(
+                    textAlign: TextAlign.center,
+                    text: TextSpan(
+                      style: defaultTextTheme.bodySmall,
+                      children: <TextSpan>[
+                        TextSpan(
+                          style:
+                              TextStyle(color: ThemeColor.get(context).grey600),
+                          text: 'Dengan mendaftar, Anda menyetujui ',
+                        ),
+                        TextSpan(
+                            style:
+                                TextStyle(color: ThemeColor.get(context).green),
+                            text: 'Perjanjian Pengguna ',
+                            recognizer: TapGestureRecognizer()
+                              ..onTap = () {
+                                WebViewTarget data = new WebViewTarget();
+                                data.name = "Perjanjian Pengguna";
+                                data.url =
+                                    "https://github.com/degalih/stunt-shield-docs/blob/main/user-aggrement-id.md";
+                                routeTo(WebViewPage.path, data: data);
+                              }),
+                        TextSpan(
+                            style: TextStyle(
+                                color: ThemeColor.get(context).grey600),
+                            text: 'dan '),
+                        TextSpan(
+                            style:
+                                TextStyle(color: ThemeColor.get(context).green),
+                            text: 'Kebijakan Privasi ',
+                            recognizer: TapGestureRecognizer()
+                              ..onTap = () {
+                                WebViewTarget data = new WebViewTarget();
+                                data.name = "Kebijakan Privasi";
+                                data.url =
+                                    "https://github.com/degalih/stunt-shield-docs/blob/main/privacy-policy-id.md";
+                                routeTo(WebViewPage.path, data: data);
+                              }),
+                        TextSpan(
+                            style: TextStyle(
+                                color: ThemeColor.get(context).grey600),
+                            text: 'kami'),
+                      ],
+                    ),
+                  )
+                ],
+              ),
             ),
           ),
         ),
