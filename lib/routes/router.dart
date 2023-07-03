@@ -1,3 +1,4 @@
+import '/resources/pages/login_page.dart';
 import '/resources/pages/web_view_page.dart';
 
 import '/resources/pages/home_page.dart';
@@ -17,6 +18,7 @@ import 'package:nylo_framework/nylo_framework.dart';
 appRouter() => nyRoutes((router) {
       router.route(HomePage.path, (context) => HomePage());
       router.route(WebViewPage.path, (context) => WebViewPage());
+      router.route(LoginPage.path, (context) => LoginPage());
       // Add your routes here
 
       // router.route(NewPage.path, (context) => NewPage(), transition: PageTransitionType.fade);
