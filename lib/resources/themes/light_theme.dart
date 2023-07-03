@@ -43,6 +43,9 @@ ThemeData lightTheme(ColorStyles color) {
       style: TextButton.styleFrom(
           foregroundColor: color.white, backgroundColor: color.green),
     ),
+    outlinedButtonTheme: OutlinedButtonThemeData(
+      style: OutlinedButton.styleFrom(side: BorderSide(color: color.green600)),
+    ),
     bottomNavigationBarTheme: BottomNavigationBarThemeData(
       backgroundColor: color.green50,
       unselectedIconTheme: IconThemeData(color: color.grey600),

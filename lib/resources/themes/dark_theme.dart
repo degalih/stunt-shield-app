@@ -30,14 +30,17 @@ ThemeData darkTheme(ColorStyles color) {
         systemOverlayStyle: SystemUiOverlayStyle.light),
     buttonTheme: ButtonThemeData(
       buttonColor: color.green,
-      colorScheme: ColorScheme.light(primary: color.green),
+      colorScheme: ColorScheme.light(primary: color.white),
     ),
     textButtonTheme: TextButtonThemeData(
-      style: TextButton.styleFrom(foregroundColor: color.green),
+      style: TextButton.styleFrom(foregroundColor: color.white),
     ),
     elevatedButtonTheme: ElevatedButtonThemeData(
       style: TextButton.styleFrom(
-          foregroundColor: color.green, backgroundColor: color.green),
+          foregroundColor: color.white, backgroundColor: color.green),
+    ),
+    outlinedButtonTheme: OutlinedButtonThemeData(
+      style: OutlinedButton.styleFrom(side: BorderSide(color: color.green600)),
     ),
     bottomNavigationBarTheme: BottomNavigationBarThemeData(
       backgroundColor: color.green600,
