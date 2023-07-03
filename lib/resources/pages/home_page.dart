@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_app/app/models/web_view_target.dart';
 import 'package:flutter_app/bootstrap/extensions.dart';
 import 'package:flutter_app/bootstrap/helpers.dart';
+import 'package:flutter_app/resources/pages/login_page.dart';
 import 'package:flutter_app/resources/pages/web_view_page.dart';
 import 'package:flutter_app/resources/themes/text_theme/default_text_theme.dart';
 import 'package:flutter_app/resources/widgets/logo_widget.dart';
@@ -45,10 +46,12 @@ class _HomePageState extends NyState<HomePage> {
                 children: <Widget>[
                   Logo(),
                   SvgPicture.network(
-                      'https://res.cloudinary.com/stunt-shield-cloudinary/image/upload/v1687707417/Stunt%20Shield%20App%20Assets/toodler-ilus_moqji2.svg',
-                      placeholderBuilder: (BuildContext context) => Container(
-                          padding: const EdgeInsets.all(30.0),
-                          child: const CircularProgressIndicator())),
+                    'https://res.cloudinary.com/stunt-shield-cloudinary/image/upload/v1687707417/Stunt%20Shield%20App%20Assets/toodler-ilus_moqji2.svg',
+                    placeholderBuilder: (BuildContext context) => Container(
+                      padding: const EdgeInsets.all(30.0),
+                      child: const CircularProgressIndicator(),
+                    ),
+                  ),
                   SizedBox(height: 32),
                   Text('Selamat Datang!').displayMedium(context),
                   Text("Bergabunglah dengan kami sekarang buat akun atau masuk",
@@ -67,7 +70,9 @@ class _HomePageState extends NyState<HomePage> {
                         minimumSize: const Size.fromHeight(50),
                         shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(8.0))),
-                    onPressed: () {},
+                    onPressed: () {
+                      routeTo(LoginPage.path);
+                    },
                     child: Text(
                       'Masuk',
                       style: defaultTextTheme.labelLarge,
