@@ -1,3 +1,4 @@
+import '/resources/pages/register_page.dart';
 import '/resources/pages/login_page.dart';
 import '/resources/pages/web_view_page.dart';
 
@@ -19,6 +20,7 @@ appRouter() => nyRoutes((router) {
       router.route(HomePage.path, (context) => HomePage());
       router.route(WebViewPage.path, (context) => WebViewPage());
       router.route(LoginPage.path, (context) => LoginPage());
+      router.route(RegisterPage.path, (context) => RegisterPage());
       // Add your routes here
 
       // router.route(NewPage.path, (context) => NewPage(), transition: PageTransitionType.fade);

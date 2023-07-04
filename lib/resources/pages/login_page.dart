@@ -1,6 +1,7 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_app/bootstrap/helpers.dart';
+import 'package:flutter_app/resources/pages/register_page.dart';
 import 'package:flutter_app/resources/themes/text_theme/default_text_theme.dart';
 import 'package:flutter_app/resources/widgets/safearea_widget.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -284,7 +285,13 @@ class _LoginPageState extends NyState<LoginPage> {
                           style:
                               TextStyle(color: ThemeColor.get(context).green),
                           text: 'Daftar ',
-                          recognizer: TapGestureRecognizer()..onTap = () {}),
+                          recognizer: TapGestureRecognizer()
+                            ..onTap = () {
+                              routeTo(
+                                RegisterPage.path,
+                                navigationType: NavigationType.pushReplace,
+                              );
+                            }),
                     ],
                   ),
                 )

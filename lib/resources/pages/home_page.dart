@@ -4,6 +4,7 @@ import 'package:flutter_app/app/models/web_view_target.dart';
 import 'package:flutter_app/bootstrap/extensions.dart';
 import 'package:flutter_app/bootstrap/helpers.dart';
 import 'package:flutter_app/resources/pages/login_page.dart';
+import 'package:flutter_app/resources/pages/register_page.dart';
 import 'package:flutter_app/resources/pages/web_view_page.dart';
 import 'package:flutter_app/resources/themes/text_theme/default_text_theme.dart';
 import 'package:flutter_app/resources/widgets/logo_widget.dart';
@@ -84,7 +85,9 @@ class _HomePageState extends NyState<HomePage> {
                         minimumSize: const Size.fromHeight(50),
                         shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(8.0))),
-                    onPressed: () {},
+                    onPressed: () {
+                      routeTo(RegisterPage.path);
+                    },
                     child: Text(
                       'Daftar',
                       style: defaultTextTheme.labelLarge,
