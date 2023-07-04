@@ -1,6 +1,7 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_app/bootstrap/helpers.dart';
+import 'package:flutter_app/resources/pages/recipe_page.dart';
 import 'package:flutter_app/resources/pages/register_page.dart';
 import 'package:flutter_app/resources/themes/text_theme/default_text_theme.dart';
 import 'package:flutter_app/resources/widgets/safearea_widget.dart';
@@ -168,7 +169,9 @@ class _LoginPageState extends NyState<LoginPage> {
                       borderRadius: BorderRadius.circular(8.0),
                     ),
                   ),
-                  onPressed: () {},
+                  onPressed: () {
+                    routeTo(RecipePage.path);
+                  },
                   child: Text(
                     'Masuk',
                     style: defaultTextTheme.labelLarge,
