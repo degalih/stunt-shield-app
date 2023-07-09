@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app/app/models/user.dart';
 import 'package:nylo_framework/nylo_framework.dart';
 import '/app/controllers/controller.dart';
 
@@ -14,9 +15,11 @@ class FoodPage extends NyStatefulWidget {
 }
 
 class _FoodPageState extends NyState<FoodPage> {
+  User? user;
   @override
   init() async {
     super.init();
+    user = await Auth.user<User>();
   }
 
   @override
@@ -26,6 +29,13 @@ class _FoodPageState extends NyState<FoodPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Center(child: Text('Ini adalah halaman resep'));
+    return Center(
+        child: Column(
+      children: [
+        Text('Token: ${user?.jwt}'),
+        Text('Nama: ${user?.firstName}'),
+        Text('Ini adalah halaman resep'),
+      ],
+    ));
   }
 }

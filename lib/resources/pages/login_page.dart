@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_app/app/models/user.dart';
 import 'package:flutter_app/app/networking/api_service.dart';
 import 'package:flutter_app/bootstrap/helpers.dart';
+import 'package:flutter_app/resources/pages/recipe_page.dart';
 import 'package:flutter_app/resources/pages/register_page.dart';
 import 'package:flutter_app/resources/themes/text_theme/default_text_theme.dart';
 import 'package:flutter_app/resources/widgets/safearea_widget.dart';
@@ -35,6 +36,8 @@ class _LoginPageState extends NyState<LoginPage> {
 
   @override
   void dispose() {
+    _emailController.clear();
+    _passwordController.clear();
     super.dispose();
   }
 
@@ -344,7 +347,9 @@ class _LoginPageState extends NyState<LoginPage> {
         User? user = await api<ApiService>(
             (request) => request.fetchUser(identifier, password),
             context: context);
-        print(user?.toJson());
+        await Auth.set(user);
+        routeTo(RecipePage.path,
+            navigationType: NavigationType.pushAndForgetAll);
         setLoading(false, name: 'loadLogin');
       },
     );
