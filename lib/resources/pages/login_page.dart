@@ -340,8 +340,8 @@ class _LoginPageState extends NyState<LoginPage> {
 
   Future<void> _login(String identifier, String password) async {
     await validate(
-      rules: {"email address": "email"},
-      data: {"email address": identifier},
+      rules: {"email address": "email", "Password": "not_empty"},
+      data: {"email address": identifier, "Password": password},
       onSuccess: () async {
         setLoading(true, name: 'loadLogin');
         User? user = await api<ApiService>(
