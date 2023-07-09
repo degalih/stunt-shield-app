@@ -1,7 +1,8 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_app/app/models/user.dart';
+import 'package:flutter_app/app/networking/api_service.dart';
 import 'package:flutter_app/bootstrap/helpers.dart';
-import 'package:flutter_app/resources/pages/recipe_page.dart';
 import 'package:flutter_app/resources/pages/register_page.dart';
 import 'package:flutter_app/resources/themes/text_theme/default_text_theme.dart';
 import 'package:flutter_app/resources/widgets/safearea_widget.dart';
@@ -170,7 +171,7 @@ class _LoginPageState extends NyState<LoginPage> {
                     ),
                   ),
                   onPressed: () {
-                    routeTo(RecipePage.path);
+                    _login(_emailController.text, _passwordController.text);
                   },
                   child: Text(
                     'Masuk',
@@ -297,12 +298,19 @@ class _LoginPageState extends NyState<LoginPage> {
                             }),
                     ],
                   ),
-                )
+                ),
               ],
             ),
           ),
         ),
       ),
     );
+  }
+
+  Future<void> _login(String identifier, String password) async {
+    User? user = await api<ApiService>(
+        (request) => request.fetchUser(identifier, password),
+        context: context);
+    print(user?.toJson());
   }
 }
