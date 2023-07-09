@@ -22,7 +22,7 @@ appRouter() => nyRoutes((router) {
       router.route(WebViewPage.path, (context) => WebViewPage());
       router.route(LoginPage.path, (context) => LoginPage());
       router.route(RegisterPage.path, (context) => RegisterPage());
-      router.route(RecipePage.path, (context) => RecipePage());
+      router.route(RecipePage.path, (context) => RecipePage(), authPage: true);
       // Add your routes here
 
       // router.route(NewPage.path, (context) => NewPage(), transition: PageTransitionType.fade);
