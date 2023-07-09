@@ -162,22 +162,50 @@ class _LoginPageState extends NyState<LoginPage> {
                   ),
                 ),
                 SizedBox(height: 16.0),
-                ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                    elevation: 2.0,
-                    minimumSize: const Size.fromHeight(50),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(8.0),
-                    ),
-                  ),
-                  onPressed: () {
-                    _login(_emailController.text, _passwordController.text);
-                  },
-                  child: Text(
-                    'Masuk',
-                    style: defaultTextTheme.labelLarge,
-                  ),
-                ),
+                isLoading(name: 'loadLogin')
+                    ? ElevatedButton.icon(
+                        icon: Container(
+                          width: 24,
+                          height: 24,
+                          padding: const EdgeInsets.all(2.0),
+                          child: const CircularProgressIndicator(
+                            color: Colors.white,
+                            strokeWidth: 3,
+                          ),
+                        ),
+                        style: ElevatedButton.styleFrom(
+                          elevation: 2.0,
+                          minimumSize: const Size.fromHeight(50),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(8.0),
+                          ),
+                        ),
+                        onPressed: () {
+                          _login(
+                              _emailController.text, _passwordController.text);
+                        },
+                        label: Text(
+                          'Loading...',
+                          style: defaultTextTheme.labelLarge,
+                        ),
+                      )
+                    : ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                          elevation: 2.0,
+                          minimumSize: const Size.fromHeight(50),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(8.0),
+                          ),
+                        ),
+                        onPressed: () {
+                          _login(
+                              _emailController.text, _passwordController.text);
+                        },
+                        child: Text(
+                          'Masuk',
+                          style: defaultTextTheme.labelLarge,
+                        ),
+                      ),
                 SizedBox(height: 16.0),
                 Row(
                   crossAxisAlignment: CrossAxisAlignment.center,
@@ -308,9 +336,17 @@ class _LoginPageState extends NyState<LoginPage> {
   }
 
   Future<void> _login(String identifier, String password) async {
-    User? user = await api<ApiService>(
-        (request) => request.fetchUser(identifier, password),
-        context: context);
-    print(user?.toJson());
+    await validate(
+      rules: {"email address": "email"},
+      data: {"email address": identifier},
+      onSuccess: () async {
+        setLoading(true, name: 'loadLogin');
+        User? user = await api<ApiService>(
+            (request) => request.fetchUser(identifier, password),
+            context: context);
+        print(user?.toJson());
+        setLoading(false, name: 'loadLogin');
+      },
+    );
   }
 }
