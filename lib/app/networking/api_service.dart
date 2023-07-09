@@ -19,23 +19,10 @@ class ApiService extends BaseApiService {
   };
 
   Future<User?> fetchUser(String identifier, String password) async {
-    // try {
     return await network<User>(
       request: (request) => request.post("/auth/local",
           data: {"identifier": identifier, "password": password}),
     );
-    // } on DioException catch (e) {
-    //   if (e.response != null) {
-    //     print(e.response!.data);
-    //     print(e.response!.headers);
-    //     print(e.response!.requestOptions);
-    //   } else {
-    //     // Something happened in setting up or sending the request that triggered an Error
-    //     print(e.requestOptions);
-    //     print(e.message);
-    //   }
-    // }
-    // return null;
   }
 
   Future<FoodRecipe?> getAllFoodRecipes() async {
