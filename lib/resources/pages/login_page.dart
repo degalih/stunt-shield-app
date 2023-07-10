@@ -1,6 +1,10 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_app/app/models/user.dart';
+import 'package:flutter_app/app/networking/api_service.dart';
 import 'package:flutter_app/bootstrap/helpers.dart';
+import 'package:flutter_app/resources/pages/recipe_page.dart';
+import 'package:flutter_app/resources/pages/register_page.dart';
 import 'package:flutter_app/resources/themes/text_theme/default_text_theme.dart';
 import 'package:flutter_app/resources/widgets/safearea_widget.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -32,6 +36,8 @@ class _LoginPageState extends NyState<LoginPage> {
 
   @override
   void dispose() {
+    _emailController.clear();
+    _passwordController.clear();
     super.dispose();
   }
 
@@ -159,20 +165,50 @@ class _LoginPageState extends NyState<LoginPage> {
                   ),
                 ),
                 SizedBox(height: 16.0),
-                ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                    elevation: 2.0,
-                    minimumSize: const Size.fromHeight(50),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(8.0),
-                    ),
-                  ),
-                  onPressed: () {},
-                  child: Text(
-                    'Masuk',
-                    style: defaultTextTheme.labelLarge,
-                  ),
-                ),
+                isLoading(name: 'loadLogin')
+                    ? ElevatedButton.icon(
+                        icon: Container(
+                          width: 24,
+                          height: 24,
+                          padding: const EdgeInsets.all(2.0),
+                          child: const CircularProgressIndicator(
+                            color: Colors.white,
+                            strokeWidth: 3,
+                          ),
+                        ),
+                        style: ElevatedButton.styleFrom(
+                          elevation: 2.0,
+                          minimumSize: const Size.fromHeight(50),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(8.0),
+                          ),
+                        ),
+                        onPressed: () {
+                          _login(
+                              _emailController.text, _passwordController.text);
+                        },
+                        label: Text(
+                          'Loading...',
+                          style: defaultTextTheme.labelLarge,
+                        ),
+                      )
+                    : ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                          elevation: 2.0,
+                          minimumSize: const Size.fromHeight(50),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(8.0),
+                          ),
+                        ),
+                        onPressed: () {
+                          _login(
+                              _emailController.text, _passwordController.text);
+                        },
+                        child: Text(
+                          'Masuk',
+                          style: defaultTextTheme.labelLarge,
+                        ),
+                      ),
                 SizedBox(height: 16.0),
                 Row(
                   crossAxisAlignment: CrossAxisAlignment.center,
@@ -284,15 +320,38 @@ class _LoginPageState extends NyState<LoginPage> {
                           style:
                               TextStyle(color: ThemeColor.get(context).green),
                           text: 'Daftar ',
-                          recognizer: TapGestureRecognizer()..onTap = () {}),
+                          recognizer: TapGestureRecognizer()
+                            ..onTap = () {
+                              routeTo(
+                                RegisterPage.path,
+                                navigationType: NavigationType.pushReplace,
+                              );
+                            }),
                     ],
                   ),
-                )
+                ),
               ],
             ),
           ),
         ),
       ),
+    );
+  }
+
+  Future<void> _login(String identifier, String password) async {
+    await validate(
+      rules: {"email address": "email", "Password": "not_empty"},
+      data: {"email address": identifier, "Password": password},
+      onSuccess: () async {
+        setLoading(true, name: 'loadLogin');
+        User? user = await api<ApiService>(
+            (request) => request.fetchUser(identifier, password),
+            context: context);
+        await Auth.set(user);
+        routeTo(RecipePage.path,
+            navigationType: NavigationType.pushAndForgetAll);
+        setLoading(false, name: 'loadLogin');
+      },
     );
   }
 }

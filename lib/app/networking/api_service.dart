@@ -1,17 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app/app/models/food_recipe.dart';
+import 'package:flutter_app/app/models/user.dart';
+import 'package:flutter_app/app/networking/dio/interceptors/bearer_auth_interceptor.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 import '../../app/networking/dio/base_api_service.dart';
 import 'package:nylo_framework/nylo_framework.dart';
-
-/*
-|--------------------------------------------------------------------------
-| ApiService
-| -------------------------------------------------------------------------
-| Define your API endpoints
-
-| Learn more https://nylo.dev/docs/5.x/networking
-|--------------------------------------------------------------------------
-*/
 
 class ApiService extends BaseApiService {
   ApiService({BuildContext? buildContext}) : super(buildContext);
@@ -21,13 +14,43 @@ class ApiService extends BaseApiService {
 
   @override
   final interceptors = {
-    if (getEnv('APP_DEBUG') == true)
-    PrettyDioLogger: PrettyDioLogger()
+    if (getEnv('APP_DEBUG') == true) PrettyDioLogger: PrettyDioLogger(),
+    BearerAuthInterceptor: BearerAuthInterceptor()
   };
 
-  Future fetchTestData() async {
-    return await network(
-        request: (request) => request.get("/endpoint-path"),
+  Future<User?> fetchUser(String identifier, String password) async {
+    return await network<User>(
+      request: (request) => request.post("/auth/local",
+          data: {"identifier": identifier, "password": password}),
     );
+  }
+
+  Future<FoodRecipe?> getAllFoodRecipes() async {
+    return await network<FoodRecipe>(
+      request: (request) => request.get(
+        "/food-recipes?populate=*",
+      ),
+      headers: {'Authorization': "Bearer ${getEnv('AUTH_USER_KEY')}"},
+    );
+  }
+
+  displayError(DioException dioException, BuildContext context) {
+    if (dioException.response != null) {
+      showToastNotification(
+        context,
+        title: dioException.response?.data['error']['name'],
+        description: dioException.response?.data['error']['message'],
+        style: ToastNotificationStyleType.DANGER,
+      );
+    } else {
+      showToastNotification(
+        context,
+        title: 'Oops!',
+        description: dioException.message.toString(),
+        style: ToastNotificationStyleType.DANGER,
+      );
+    }
+
+    // or display the error however you want
   }
 }

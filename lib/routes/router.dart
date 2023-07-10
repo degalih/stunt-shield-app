@@ -1,25 +1,36 @@
+import 'package:flutter/material.dart';
+
+import '/resources/pages/recipe_page.dart';
+import '/resources/pages/register_page.dart';
 import '/resources/pages/login_page.dart';
 import '/resources/pages/web_view_page.dart';
 
 import '/resources/pages/home_page.dart';
 import 'package:nylo_framework/nylo_framework.dart';
 
-/*
-|--------------------------------------------------------------------------
-| App Router
-|
-| * [Tip] Create pages faster 🚀
-| Run the below in the terminal to create new a page.
-| "dart run nylo_framework:main make:page profile_page"
-| Learn more https://nylo.dev/docs/5.x/router
-|--------------------------------------------------------------------------
-*/
-
 appRouter() => nyRoutes((router) {
       router.route(HomePage.path, (context) => HomePage());
       router.route(WebViewPage.path, (context) => WebViewPage());
       router.route(LoginPage.path, (context) => LoginPage());
-      // Add your routes here
-
-      // router.route(NewPage.path, (context) => NewPage(), transition: PageTransitionType.fade);
+      router.route(RegisterPage.path, (context) => RegisterPage());
+      router.route(
+        RecipePage.path,
+        (context) => RecipePage(),
+        routeGuards: [AuthRouteGuard()],
+        initialRoute: true,
+      );
     });
+
+class AuthRouteGuard extends NyRouteGuard {
+  AuthRouteGuard();
+
+  @override
+  Future<bool> canOpen(BuildContext? context, NyArgument? data) async {
+    return (await Auth.loggedIn());
+  }
+
+  @override
+  redirectTo(BuildContext? context, NyArgument? data) async {
+    await routeTo(HomePage.path);
+  }
+}
