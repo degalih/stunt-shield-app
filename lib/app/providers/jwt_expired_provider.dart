@@ -1,13 +1,12 @@
+import 'package:flutter_app/app/models/user.dart';
 import 'package:jwt_decoder/jwt_decoder.dart';
 import 'package:nylo_framework/nylo_framework.dart';
 
 class JwtExpiredProvider implements NyProvider {
   boot(Nylo nylo) async {
     if (await Auth.loggedIn() == true) {
-      bool hasExpired = JwtDecoder.isExpired(
-        getEnv('AUTH_USER_KEY'),
-      );
-
+      User? user = await Auth.user();
+      bool hasExpired = JwtDecoder.isExpired(user?.jwt ?? '-');
       if (hasExpired == true) {
         await Auth.remove();
       }

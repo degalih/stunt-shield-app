@@ -27,11 +27,9 @@ class ApiService extends BaseApiService {
 
   Future<FoodRecipe?> getAllFoodRecipes() async {
     return await network<FoodRecipe>(
-      request: (request) => request.get(
-        "/food-recipes?populate=*",
-      ),
-      headers: {'Authorization': "Bearer ${getEnv('AUTH_USER_KEY')}"},
-    );
+        request: (request) => request.get(
+              "/food-recipes?populate=*",
+            ));
   }
 
   displayError(DioException dioException, BuildContext context) {

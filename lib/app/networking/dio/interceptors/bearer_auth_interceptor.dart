@@ -1,12 +1,13 @@
-import 'package:flutter_app/config/storage_keys.dart';
+import 'package:flutter_app/app/models/user.dart';
 import 'package:nylo_framework/nylo_framework.dart';
 
 class BearerAuthInterceptor extends Interceptor {
   @override
-  void onRequest(RequestOptions options, RequestInterceptorHandler handler) {
-    String? userToken = Backpack.instance.read(StorageKey.userToken);
-    if (userToken != null) {
-      options.headers.addAll({"Authorization": "Bearer $userToken"});
+  void onRequest(
+      RequestOptions options, RequestInterceptorHandler handler) async {
+    User? user = await Auth.user();
+    if (user != null) {
+      options.headers.addAll({"Authorization": "Bearer ${user.jwt}"});
     }
     return super.onRequest(options, handler);
   }
