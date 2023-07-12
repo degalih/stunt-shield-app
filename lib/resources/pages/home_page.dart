@@ -16,7 +16,7 @@ import 'package:nylo_framework/nylo_framework.dart';
 class HomePage extends NyStatefulWidget {
   HomePage({Key? key}) : super(key: key);
 
-  static const path = '/';
+  static const path = '/home-page';
 
   @override
   final HomeController controller = HomeController();
