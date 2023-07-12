@@ -1,31 +1,32 @@
 import 'package:nylo_framework/nylo_framework.dart';
 
 class User extends Model {
-  int? id;
-  String? firstName;
-  String? lastName;
-  String? email;
-  String? username;
-  String? provider;
+  // int? id;
+  // String? firstName;
+  // String? lastName;
+  // String? email;
+  // String? username;
+  // String? provider;
   String? jwt;
 
   User();
 
   User.fromJson(dynamic data) {
-    this.firstName = data['user']['firstName'];
-    this.lastName = data['user']['lastName'];
-    this.email = data['user']['email'];
-    this.username = data['user']['username'];
-    this.provider = data['user']['provider'];
-    this.jwt = data['jwt'];
+    // id = data['user']['id'];
+    // firstName = data['user']['firstName'];
+    // lastName = data['user']['lastName'];
+    // email = data['user']['email'];
+    // username = data['user']['username'];
+    // provider = data['user']['provider'];
+    jwt = data['jwt'];
   }
 
   toJson() => {
-        "firstName": this.firstName,
-        "lastName": this.lastName,
-        "email": this.email,
-        "username": this.username,
-        "provider": this.provider,
-        "jwt": this.jwt,
+        // "firstName": firstName,
+        // "lastName": lastName,
+        // "email": email,
+        // "username": username,
+        // "provider": provider,
+        "jwt": jwt,
       };
 }
