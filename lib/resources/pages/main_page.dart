@@ -1,34 +1,34 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_app/resources/pages/calculator_page.dart';
-import 'package:flutter_app/resources/pages/favorite_page.dart';
-import 'package:flutter_app/resources/pages/food_page.dart';
-import 'package:flutter_app/resources/pages/profile_page.dart';
+import 'package:flutter_app/resources/widgets/bookmark_recipe_widget.dart';
+import 'package:flutter_app/resources/widgets/food_recipe_widget.dart';
+import 'package:flutter_app/resources/widgets/nutrition_calculator_widget.dart';
+import 'package:flutter_app/resources/widgets/profile_widget.dart';
 import 'package:flutter_app/resources/widgets/safearea_widget.dart';
+import 'package:flutter_app/resources/widgets/search_recipe_widget.dart';
 import 'package:nylo_framework/nylo_framework.dart';
 import 'package:salomon_bottom_bar/salomon_bottom_bar.dart';
 import '/app/controllers/controller.dart';
-import 'search_page.dart';
 
-class RecipePage extends NyStatefulWidget {
+class MainPage extends NyStatefulWidget {
   final Controller controller = Controller();
 
-  static const path = '/recipe';
+  static const path = '/main';
 
-  RecipePage({Key? key}) : super(key: key);
+  MainPage({Key? key}) : super(key: key);
 
   @override
-  _RecipePageState createState() => _RecipePageState();
+  _MainPageState createState() => _MainPageState();
 }
 
-class _RecipePageState extends NyState<RecipePage> {
+class _MainPageState extends NyState<MainPage> {
   int _currentIndex = 0;
 
   final List<Widget> _listWidget = <Widget>[
-    FoodPage(),
-    SearchPage(),
-    CalculatorPage(),
-    FavoritePage(),
-    ProfilePage()
+    FoodRecipe(),
+    SearchRecipe(),
+    NutritionCalculator(),
+    BookmarkRecipe(),
+    Profile(),
   ];
 
   @override
@@ -44,7 +44,6 @@ class _RecipePageState extends NyState<RecipePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(),
       body: SafeAreaWidget(
         child: Container(
           child: _listWidget[_currentIndex],

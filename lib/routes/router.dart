@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-
-import '/resources/pages/recipe_page.dart';
+import 'package:flutter_app/resources/pages/main_page.dart';
 import '/resources/pages/register_page.dart';
 import '/resources/pages/login_page.dart';
 import '/resources/pages/web_view_page.dart';
@@ -14,8 +13,8 @@ appRouter() => nyRoutes((router) async {
       router.route(LoginPage.path, (context) => LoginPage());
       router.route(RegisterPage.path, (context) => RegisterPage());
       router.route(
-        RecipePage.path,
-        (context) => RecipePage(),
+        MainPage.path,
+        (context) => MainPage(),
         routeGuards: [AuthRouteGuard()],
         authPage: true,
       );
