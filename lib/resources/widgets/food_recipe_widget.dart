@@ -28,7 +28,8 @@ class _FoodRecipeState extends NyState<FoodRecipe> {
           return Container(
             color: ThemeColor.get(context).grey50,
             child: Padding(
-              padding: const EdgeInsets.all(20.0),
+              padding:
+                  const EdgeInsets.symmetric(horizontal: 20.0, vertical: 36),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
@@ -42,6 +43,8 @@ class _FoodRecipeState extends NyState<FoodRecipe> {
                     shrinkWrap: true,
                     crossAxisCount: 2,
                     childAspectRatio: 1.0 / 1.3,
+                    mainAxisSpacing: 16.0,
+                    crossAxisSpacing: 8.0,
                     children: <Widget>[
                       ...recipes!.map(
                         (recipe) => Card(
@@ -99,7 +102,7 @@ class _FoodRecipeState extends NyState<FoodRecipe> {
                                           height: 24,
                                         ),
                                         Text(
-                                          '${recipe.nutritions!.choG}g' ?? '-',
+                                          '${recipe.nutritions!.choG}g',
                                           style: defaultTextTheme.labelSmall!
                                               .copyWith(
                                                   fontWeight: FontWeight.w600,
@@ -115,7 +118,7 @@ class _FoodRecipeState extends NyState<FoodRecipe> {
                                           height: 24,
                                         ),
                                         Text(
-                                          '${recipe.nutritions!.fatG}g' ?? '-',
+                                          '${recipe.nutritions!.fatG}g',
                                           style: defaultTextTheme.labelSmall!
                                               .copyWith(
                                                   fontWeight: FontWeight.w600,
@@ -131,8 +134,7 @@ class _FoodRecipeState extends NyState<FoodRecipe> {
                                           height: 24,
                                         ),
                                         Text(
-                                          '${recipe.nutritions!.waterG}g' ??
-                                              '-',
+                                          '${recipe.nutritions!.waterG}g',
                                           style: defaultTextTheme.labelSmall!
                                               .copyWith(
                                                   fontWeight: FontWeight.w600,
@@ -148,8 +150,7 @@ class _FoodRecipeState extends NyState<FoodRecipe> {
                                           height: 24,
                                         ),
                                         Text(
-                                          '${recipe.nutritions!.energyKal}kal' ??
-                                              '-',
+                                          '${recipe.nutritions!.energyKal}kal',
                                           style: defaultTextTheme.labelSmall!
                                               .copyWith(
                                                   fontWeight: FontWeight.w600,
@@ -165,8 +166,7 @@ class _FoodRecipeState extends NyState<FoodRecipe> {
                                           height: 24,
                                         ),
                                         Text(
-                                          '${recipe.nutritions!.proteinG}g' ??
-                                              '-',
+                                          '${recipe.nutritions!.proteinG}g',
                                           style: defaultTextTheme.labelSmall!
                                               .copyWith(
                                                   fontWeight: FontWeight.w600,
