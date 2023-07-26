@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_app/app/models/food_recipe_list.dart';
+import 'package:flutter_app/app/models/response/food_recipe_list.dart';
 import 'package:flutter_app/app/networking/api_service.dart';
 import 'package:flutter_app/bootstrap/helpers.dart';
 import 'package:flutter_app/resources/pages/food_recipe_detail_page.dart';
@@ -50,7 +50,7 @@ class _FoodRecipeState extends NyState<FoodRecipe> {
                       ...recipes!.map(
                         (recipe) => GestureDetector(
                           onTap: () {
-                            routeTo(FoodRecipeDetailPage.path);
+                            routeTo(FoodRecipeDetailPage.path, data: recipe.id);
                           },
                           child: Card(
                             color: ThemeColor.get(context).white,
