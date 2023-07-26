@@ -1,3 +1,4 @@
+import 'package:flutter_app/app/models/nutritions.dart';
 import 'package:nylo_framework/nylo_framework.dart';
 
 class FoodRecipeList extends Model {
@@ -7,7 +8,6 @@ class FoodRecipeList extends Model {
   String? source;
   String? imgUrl;
   Nutritions? nutritions;
-  // List<steps> steps;
 
   FoodRecipeList();
 
@@ -26,31 +26,6 @@ class FoodRecipeList extends Model {
         "age": age,
         "source": source,
         "imgUrl": imgUrl,
-      };
-}
-
-class Nutritions extends Model {
-  String? choG;
-  String? fatG;
-  String? waterG;
-  String? proteinG;
-  String? energyKal;
-
-  Nutritions();
-
-  Nutritions.fromJson(dynamic data) {
-    choG = data['CHO(g)'];
-    fatG = data['Fat(g)'];
-    waterG = data['Water(g)'];
-    proteinG = data['Protein(g)'];
-    energyKal = data['Energy(kal)'];
-  }
-
-  toJson() => {
-        "CHO(g)": choG,
-        "Fat(g)": fatG,
-        "Water(g)": waterG,
-        "Protein(g)": proteinG,
-        "Energy(kal)": energyKal,
+        "nutritions": nutritions,
       };
 }
