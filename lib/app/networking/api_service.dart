@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_app/app/models/food_recipe.dart';
+import 'package:flutter_app/app/models/food_recipe_list.dart';
 import 'package:flutter_app/app/models/user.dart';
 import 'package:flutter_app/app/networking/dio/interceptors/bearer_auth_interceptor.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
@@ -25,10 +25,10 @@ class ApiService extends BaseApiService {
     );
   }
 
-  Future<FoodRecipe?> getAllFoodRecipes() async {
-    return await network<FoodRecipe>(
+  Future<List<FoodRecipeList>?> getAllFoodRecipes() async {
+    return await network<List<FoodRecipeList>>(
         request: (request) => request.get(
-              "/food-recipes?populate=*",
+              "/food-recipes?sort=name&fields[0]=name&fields[1]=age&fields[2]=source&fields[3]=nutritions&fields[4]=ingredients&fields[5]=steps&populate[img][fields][1]=url",
             ));
   }
 

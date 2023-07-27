@@ -3,7 +3,6 @@ import 'package:flutter_app/resources/widgets/bookmark_recipe_widget.dart';
 import 'package:flutter_app/resources/widgets/food_recipe_widget.dart';
 import 'package:flutter_app/resources/widgets/nutrition_calculator_widget.dart';
 import 'package:flutter_app/resources/widgets/profile_widget.dart';
-import 'package:flutter_app/resources/widgets/safearea_widget.dart';
 import 'package:flutter_app/resources/widgets/search_recipe_widget.dart';
 import 'package:nylo_framework/nylo_framework.dart';
 import 'package:salomon_bottom_bar/salomon_bottom_bar.dart';
@@ -44,11 +43,7 @@ class _MainPageState extends NyState<MainPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SafeAreaWidget(
-        child: Container(
-          child: _listWidget[_currentIndex],
-        ),
-      ),
+      body: Center(child: _listWidget[_currentIndex]),
       bottomNavigationBar: SalomonBottomBar(
         itemPadding: EdgeInsets.all(16.0),
         currentIndex: _currentIndex,
