@@ -20,6 +20,7 @@ dependencies:
   cupertino_icons: ^1.0.5
   flutter:
     sdk: flutter
+  flutter_expanded_tile: ^0.3.7
   flutter_localizations:
     sdk: flutter
   flutter_svg: ^2.0.7
