@@ -5,7 +5,6 @@ class FoodRecipeList extends Model {
   int? id;
   String? name;
   String? age;
-  String? source;
   String? imgUrl;
   Nutritions? nutritions;
 
@@ -15,7 +14,6 @@ class FoodRecipeList extends Model {
     id = data['id'];
     name = data['attributes']['name'];
     age = data['attributes']['age'];
-    source = data['attributes']['source'];
     imgUrl = data['attributes']['img']['data']['attributes']['url'];
     nutritions = Nutritions.fromJson(data['attributes']['nutritions']);
   }
@@ -24,7 +22,6 @@ class FoodRecipeList extends Model {
         "id": id,
         "name": name,
         "age": age,
-        "source": source,
         "imgUrl": imgUrl,
         "nutritions": nutritions,
       };

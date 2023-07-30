@@ -26,10 +26,11 @@ class ApiService extends BaseApiService {
     );
   }
 
-  Future<List<FoodRecipeList>?> getAllFoodRecipes() async {
+  Future<List<FoodRecipeList>?> getAllFoodRecipes(
+      int page, int pageSize) async {
     return await network<List<FoodRecipeList>>(
         request: (request) => request.get(
-              "/food-recipes?sort=name&fields[0]=name&fields[1]=age&fields[2]=source&fields[3]=nutritions&fields[4]=ingredients&fields[5]=steps&populate[img][fields][1]=url",
+              "/food-recipes?fields[0]=name&sort=name&fields[1]=age&fields[2]=nutritions&populate[img][fields][1]=url&sort=name&pagination[page]=$page&pagination[pageSize]=$pageSize",
             ));
   }
 
