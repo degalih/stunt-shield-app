@@ -58,30 +58,55 @@ class _FoodRecipeState extends NyState<FoodRecipe> {
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: <Widget>[
-                                Container(
-                                  height: 100,
-                                  decoration: ShapeDecoration(
-                                    image: DecorationImage(
-                                      image: NetworkImage(recipe.imgUrl ?? '-'),
-                                      fit: BoxFit.cover,
-                                    ),
-                                    shape: RoundedRectangleBorder(
-                                        borderRadius: BorderRadius.circular(8)),
-                                    shadows: [
-                                      BoxShadow(
-                                        color: Color(0x15000000),
-                                        blurRadius: 3,
-                                        offset: Offset(0, 4),
-                                        spreadRadius: 0,
+                                Stack(
+                                  clipBehavior: Clip.none,
+                                  alignment: Alignment.topRight,
+                                  children: <Widget>[
+                                    Container(
+                                      height: 100,
+                                      decoration: ShapeDecoration(
+                                        image: DecorationImage(
+                                          image: NetworkImage(
+                                              recipe.imgUrl ?? '-'),
+                                          fit: BoxFit.cover,
+                                        ),
+                                        shape: RoundedRectangleBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(8)),
+                                        shadows: [
+                                          BoxShadow(
+                                            color: Color(0x15000000),
+                                            blurRadius: 3,
+                                            offset: Offset(0, 4),
+                                            spreadRadius: 0,
+                                          ),
+                                          BoxShadow(
+                                            color: Color(0x2A000000),
+                                            blurRadius: 3,
+                                            offset: Offset(0, 2),
+                                            spreadRadius: 0,
+                                          )
+                                        ],
                                       ),
-                                      BoxShadow(
-                                        color: Color(0x2A000000),
-                                        blurRadius: 3,
-                                        offset: Offset(0, 2),
-                                        spreadRadius: 0,
-                                      )
-                                    ],
-                                  ),
+                                    ),
+                                    Positioned(
+                                      top: 4.0,
+                                      right: 4.0,
+                                      child: Badge(
+                                        label: Text(
+                                          recipe.age ?? '-',
+                                        ),
+                                        textStyle: defaultTextTheme.labelSmall!
+                                            .copyWith(fontSize: 10),
+                                        textColor: recipe.age == 'Bumil'
+                                            ? ThemeColor.get(context).blue700
+                                            : ThemeColor.get(context).yellow700,
+                                        backgroundColor: recipe.age == 'Bumil'
+                                            ? ThemeColor.get(context).blue50
+                                            : ThemeColor.get(context).yellow50,
+                                      ),
+                                    )
+                                  ],
                                 ),
                                 Container(
                                   height: 45.0,
@@ -104,7 +129,7 @@ class _FoodRecipeState extends NyState<FoodRecipe> {
                                       Column(
                                         children: [
                                           Image.network(
-                                            'https://res.cloudinary.com/stunt-shield-cloudinary/image/upload/v1690100268/Stunt%20Shield%20App%20Assets/karbo_jyfsfo.png',
+                                            'https://res.cloudinary.com/stunt-shield-cloudinary/image/upload/v1690725073/Stunt%20Shield%20App%20Assets/wheat_qw91rt.png',
                                             height: 24,
                                           ),
                                           Text(
@@ -121,7 +146,7 @@ class _FoodRecipeState extends NyState<FoodRecipe> {
                                       Column(
                                         children: [
                                           Image.network(
-                                            'https://res.cloudinary.com/stunt-shield-cloudinary/image/upload/v1690178821/Stunt%20Shield%20App%20Assets/fat_nifdcf.png',
+                                            'https://res.cloudinary.com/stunt-shield-cloudinary/image/upload/v1690725073/Stunt%20Shield%20App%20Assets/fat_1_hihtys.png',
                                             height: 24,
                                           ),
                                           Text(
@@ -138,24 +163,7 @@ class _FoodRecipeState extends NyState<FoodRecipe> {
                                       Column(
                                         children: [
                                           Image.network(
-                                            'https://res.cloudinary.com/stunt-shield-cloudinary/image/upload/v1690178821/Stunt%20Shield%20App%20Assets/h2o_qttczr.png',
-                                            height: 24,
-                                          ),
-                                          Text(
-                                            '${recipe.nutritions!.waterG}g',
-                                            style: defaultTextTheme.labelSmall!
-                                                .copyWith(
-                                                    fontWeight: FontWeight.w600,
-                                                    color:
-                                                        ThemeColor.get(context)
-                                                            .grey700),
-                                          )
-                                        ],
-                                      ),
-                                      Column(
-                                        children: [
-                                          Image.network(
-                                            'https://res.cloudinary.com/stunt-shield-cloudinary/image/upload/v1690178822/Stunt%20Shield%20App%20Assets/calories_uq5gmv.png',
+                                            'https://res.cloudinary.com/stunt-shield-cloudinary/image/upload/v1690725073/Stunt%20Shield%20App%20Assets/calories_1_rt9ce7.png',
                                             height: 24,
                                           ),
                                           Text(
@@ -172,7 +180,7 @@ class _FoodRecipeState extends NyState<FoodRecipe> {
                                       Column(
                                         children: [
                                           Image.network(
-                                            'https://res.cloudinary.com/stunt-shield-cloudinary/image/upload/v1690178822/Stunt%20Shield%20App%20Assets/proteins_gwpula.png',
+                                            'https://res.cloudinary.com/stunt-shield-cloudinary/image/upload/v1690725073/Stunt%20Shield%20App%20Assets/chicken_azimwd.png',
                                             height: 24,
                                           ),
                                           Text(

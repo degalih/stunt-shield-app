@@ -86,13 +86,13 @@ class _FoodRecipeDetailPageState extends NyState<FoodRecipeDetailPage> {
                                       spacing: 4.0,
                                       children: <Widget>[
                                         Image.network(
-                                          recipe.source == "UNICEF"
+                                          recipe.recipe_source == "UNICEF"
                                               ? 'https://res.cloudinary.com/stunt-shield-cloudinary/image/upload/v1690350694/Stunt%20Shield%20App%20Assets/unicef-logo_ro0lfd.png'
                                               : 'https://res.cloudinary.com/stunt-shield-cloudinary/image/upload/v1690178823/Stunt%20Shield%20App%20Assets/kemenkes_ouroof.png',
                                           height: 16.0,
                                         ),
                                         Text(
-                                          recipe.source ?? '-',
+                                          recipe.recipe_source ?? '-',
                                           style: defaultTextTheme.labelSmall!
                                               .copyWith(
                                             color:
@@ -121,7 +121,9 @@ class _FoodRecipeDetailPageState extends NyState<FoodRecipeDetailPage> {
                                       spacing: 4.0,
                                       children: <Widget>[
                                         Image.network(
-                                          'https://res.cloudinary.com/stunt-shield-cloudinary/image/upload/v1690178821/Stunt%20Shield%20App%20Assets/baby_r3dlbi.png',
+                                          recipe.age == "Bumil"
+                                              ? 'https://res.cloudinary.com/stunt-shield-cloudinary/image/upload/v1690725603/Stunt%20Shield%20App%20Assets/pregnant_duwbdi.png'
+                                              : 'https://res.cloudinary.com/stunt-shield-cloudinary/image/upload/v1690178821/Stunt%20Shield%20App%20Assets/baby_r3dlbi.png',
                                           height: 16.0,
                                         ),
                                         Text(
@@ -167,7 +169,7 @@ class _FoodRecipeDetailPageState extends NyState<FoodRecipeDetailPage> {
                             .copyWith(color: ThemeColor.get(context).black),
                       ),
                       leading: Image.network(
-                        'https://res.cloudinary.com/stunt-shield-cloudinary/image/upload/v1690178822/Stunt%20Shield%20App%20Assets/ingredient_zywqlp.png',
+                        'https://res.cloudinary.com/stunt-shield-cloudinary/image/upload/v1690725073/Stunt%20Shield%20App%20Assets/ingredients_rimt3w.png',
                         height: 24.0,
                       ),
                       theme: ExpandedTileThemeData(
@@ -222,8 +224,7 @@ class _FoodRecipeDetailPageState extends NyState<FoodRecipeDetailPage> {
                   padding: EdgeInsets.fromLTRB(20.0, 16.0, 20.0, 0),
                   child: Card(
                     shape: RoundedRectangleBorder(
-                      borderRadius:
-                          BorderRadius.circular(8), // if you need this
+                      borderRadius: BorderRadius.circular(8),
                       side: BorderSide(
                         color: ThemeColor.get(context).grey400,
                         width: 1,
@@ -235,11 +236,12 @@ class _FoodRecipeDetailPageState extends NyState<FoodRecipeDetailPage> {
                       title: Text('Informasi Nutrisi'),
                       controller: ExpandedTileController(isExpanded: true),
                       leading: Image.network(
-                        'https://res.cloudinary.com/stunt-shield-cloudinary/image/upload/v1690178822/Stunt%20Shield%20App%20Assets/pyramid_sjpkaf.png',
+                        'https://res.cloudinary.com/stunt-shield-cloudinary/image/upload/v1690725073/Stunt%20Shield%20App%20Assets/nutrition-facts-label_vduzec.png',
                         height: 24.0,
                       ),
                       content: Column(
                         mainAxisSize: MainAxisSize.min,
+                        crossAxisAlignment: CrossAxisAlignment.start,
                         children: <Widget>[
                           Card(
                             surfaceTintColor: ThemeColor.get(context).blue50,
@@ -262,14 +264,14 @@ class _FoodRecipeDetailPageState extends NyState<FoodRecipeDetailPage> {
                             children: [
                               NutritionCardItem(
                                   imgUrl:
-                                      'https://res.cloudinary.com/stunt-shield-cloudinary/image/upload/v1690100268/Stunt%20Shield%20App%20Assets/karbo_jyfsfo.png',
+                                      'https://res.cloudinary.com/stunt-shield-cloudinary/image/upload/v1690725073/Stunt%20Shield%20App%20Assets/wheat_qw91rt.png',
                                   nutrition:
                                       '${recipe.nutritions!.choG}gram Karbohidrat'),
                               NutritionCardItem(
                                   imgUrl:
-                                      'https://res.cloudinary.com/stunt-shield-cloudinary/image/upload/v1690178822/Stunt%20Shield%20App%20Assets/calories_uq5gmv.png',
+                                      'https://res.cloudinary.com/stunt-shield-cloudinary/image/upload/v1690725073/Stunt%20Shield%20App%20Assets/calories_1_rt9ce7.png',
                                   nutrition:
-                                      '${recipe.nutritions!.choG}kal Energi'),
+                                      '${recipe.nutritions!.choG}Kal Energi'),
                             ],
                           ),
                           Row(
@@ -277,26 +279,30 @@ class _FoodRecipeDetailPageState extends NyState<FoodRecipeDetailPage> {
                             children: [
                               NutritionCardItem(
                                   imgUrl:
-                                      'https://res.cloudinary.com/stunt-shield-cloudinary/image/upload/v1690178821/Stunt%20Shield%20App%20Assets/fat_nifdcf.png',
+                                      'https://res.cloudinary.com/stunt-shield-cloudinary/image/upload/v1690725073/Stunt%20Shield%20App%20Assets/fat_1_hihtys.png',
                                   nutrition:
                                       '${recipe.nutritions!.fatG}gram Lemak'),
                               NutritionCardItem(
                                   imgUrl:
-                                      'https://res.cloudinary.com/stunt-shield-cloudinary/image/upload/v1690178822/Stunt%20Shield%20App%20Assets/proteins_gwpula.png',
+                                      'https://res.cloudinary.com/stunt-shield-cloudinary/image/upload/v1690725073/Stunt%20Shield%20App%20Assets/chicken_azimwd.png',
                                   nutrition:
                                       '${recipe.nutritions!.proteinG}gram Protein'),
                             ],
                           ),
-                          Row(
-                            mainAxisSize: MainAxisSize.min,
-                            children: [
-                              NutritionCardItem(
-                                  imgUrl:
-                                      'https://res.cloudinary.com/stunt-shield-cloudinary/image/upload/v1690178821/Stunt%20Shield%20App%20Assets/h2o_qttczr.png',
-                                  nutrition:
-                                      '${recipe.nutritions!.waterG}gram Air'),
-                            ],
+                          SizedBox(height: 8.0),
+                          Text(
+                            '*Komposisi gizi dihitung per ${recipe.large_portion}',
+                            style: defaultTextTheme.labelSmall!.copyWith(
+                              color: ThemeColor.get(context).grey600,
+                            ),
                           ),
+                          Text(
+                            'sumber: ${recipe.nutrition_info_source}',
+                            style: defaultTextTheme.labelSmall!.copyWith(
+                              color: ThemeColor.get(context).grey600,
+                            ),
+                          ),
+                          SizedBox(height: 16.0)
                         ],
                       ),
                       theme: ExpandedTileThemeData(
@@ -309,9 +315,7 @@ class _FoodRecipeDetailPageState extends NyState<FoodRecipeDetailPage> {
                     ),
                   ),
                 ),
-                SizedBox(
-                  height: 100.0,
-                )
+                SizedBox(height: 100.0)
               ],
             );
           }),

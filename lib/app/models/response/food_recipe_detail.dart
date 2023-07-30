@@ -7,7 +7,9 @@ class FoodRecipeDetail extends Model {
   int? id;
   String? name;
   String? age;
-  String? source;
+  String? recipe_source;
+  String? large_portion;
+  String? nutrition_info_source;
   String? imgUrl;
   Nutritions? nutritions;
   List<String>? ingredients;
@@ -19,7 +21,9 @@ class FoodRecipeDetail extends Model {
     id = data['id'];
     name = data['data']['attributes']['name'];
     age = data['data']['attributes']['age'];
-    source = data['data']['attributes']['source'];
+    recipe_source = data['data']['attributes']['recipe_source'];
+    large_portion = data['data']['attributes']['large_portion'];
+    nutrition_info_source = data['data']['attributes']['nutrition_info_source'];
     imgUrl = data['data']['attributes']['img']['data']['attributes']['url'];
     nutritions = Nutritions.fromJson(data['data']['attributes']['nutritions']);
     ingredients = List<String>.from(
@@ -32,7 +36,9 @@ class FoodRecipeDetail extends Model {
         "id": id,
         "name": name,
         "age": age,
-        "source": source,
+        "recipe_source": recipe_source,
+        "nutrition_info_source": nutrition_info_source,
+        "large_portion": large_portion,
         "imgUrl": imgUrl,
         "nutritions": nutritions,
         "ingredients": ingredients,
