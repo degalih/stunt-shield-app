@@ -43,7 +43,7 @@ class _MainPageState extends NyState<MainPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(child: _listWidget[_currentIndex]),
+      body: _listWidget[_currentIndex],
       bottomNavigationBar: SalomonBottomBar(
         itemPadding: EdgeInsets.all(16.0),
         currentIndex: _currentIndex,

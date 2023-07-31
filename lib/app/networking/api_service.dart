@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app/app/models/response/food_recipe_detail.dart';
 import 'package:flutter_app/app/models/response/food_recipe_list.dart';
+import 'package:flutter_app/app/models/response/food_recipe_search_result.dart';
 import 'package:flutter_app/app/models/user.dart';
 import 'package:flutter_app/app/networking/dio/interceptors/bearer_auth_interceptor.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
@@ -40,6 +41,12 @@ class ApiService extends BaseApiService {
         "/food-recipes/$id?populate[img][fields][0]=url",
       ),
     );
+  }
+
+  Future<List<FoodRecipeSearchResult>?> searchRecipes(String query) async {
+    return await network(
+        request: (request) => request.get(
+            '/food-recipes?fields[0]=name&sort=name&fields[1]=age&populate[img][fields][1]=url&filters[\$or][0][name][\$containsi]=$query&filters[\$or][1][age][\$containsi]=$query'));
   }
 
   displayError(DioException dioException, BuildContext context) {
