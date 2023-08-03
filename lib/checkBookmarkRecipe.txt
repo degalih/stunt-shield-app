@@ -1,0 +1,38 @@
+class FavoriteRecipe {
+  final int id;
+
+  FavoriteRecipe(this.id);
+}
+
+class FavoriteRecipeService {
+  Future<List<FavoriteRecipe>> getFavoriteRecipes() async {
+    await Future.delayed(Duration(seconds: 1));
+    return [
+      FavoriteRecipe(1),
+      FavoriteRecipe(3),
+      FavoriteRecipe(5),
+    ];
+  }
+}
+
+Future<bool> isRecipeBookmarked(int recipeDetailId) async {
+
+List<FavoriteRecipe> favoriteRecipes = await FavoriteRecipeService().getFavoriteRecipes();
+
+  final isBookmarked = favoriteRecipes.any((recipe) => recipe.id == recipeDetailId);
+
+  return isBookmarked;
+}
+
+Future<void> main() async {
+  final recipeId = 2; // ID resep yang ingin diperiksa
+
+  final isBookmarked = await isRecipeBookmarked(recipeId);
+
+  if (isBookmarked) {
+    print('Resep dengan ID $recipeId adalah favorit. $isBookmarked');
+  } else {
+    print('Resep dengan ID $recipeId bukan favorit. $isBookmarked');
+  }
+}
+

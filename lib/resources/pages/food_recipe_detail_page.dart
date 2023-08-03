@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app/app/models/favorite_info.dart';
 import 'package:flutter_app/app/models/response/food_recipe_detail.dart';
+import 'package:flutter_app/app/models/response/profile_me.dart';
 import 'package:flutter_app/app/networking/api_service.dart';
+import 'package:flutter_app/app/utils/check_favorite_recipe.dart';
 import 'package:flutter_app/bootstrap/helpers.dart';
 import 'package:flutter_app/resources/themes/text_theme/default_text_theme.dart';
 import 'package:flutter_app/resources/widgets/customBulletedList.dart';
@@ -22,10 +25,14 @@ class FoodRecipeDetailPage extends NyStatefulWidget {
 }
 
 class _FoodRecipeDetailPageState extends NyState<FoodRecipeDetailPage> {
+  bool isBookmarked = false;
+  int favoriteId = 0;
+  int recipeId = 0;
+
   @override
   init() async {
+    await _checkFavoriteInfo(widget.data());
     super.init();
-    print(widget.data());
   }
 
   @override
@@ -37,12 +44,14 @@ class _FoodRecipeDetailPageState extends NyState<FoodRecipeDetailPage> {
   Widget build(BuildContext context) {
     final coverHeight = 0.4 * MediaQuery.of(context).size.height;
     final width = MediaQuery.of(context).size.width;
+
     return Scaffold(
       body: NyFutureBuilder(
-          future: _fetchRecipeDetail(widget.data()),
-          child: (context, data) {
-            FoodRecipeDetail? recipe = data as FoodRecipeDetail?;
-            return ListView(
+        future: _fetchRecipeDetail(widget.data()),
+        child: (context, data) {
+          FoodRecipeDetail recipe = data as FoodRecipeDetail;
+          return Scaffold(
+            body: ListView(
               children: [
                 Stack(
                   clipBehavior: Clip.none,
@@ -53,7 +62,7 @@ class _FoodRecipeDetailPageState extends NyState<FoodRecipeDetailPage> {
                       alignment: Alignment.center,
                       children: <Widget>[
                         Image.network(
-                          recipe!.imgUrl ?? '-',
+                          recipe.imgUrl ?? '-',
                           fit: BoxFit.cover,
                           height: coverHeight,
                           width: double.infinity,
@@ -317,18 +326,58 @@ class _FoodRecipeDetailPageState extends NyState<FoodRecipeDetailPage> {
                 ),
                 SizedBox(height: 100.0)
               ],
-            );
-          }),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {},
-        child: Icon(Icons.bookmark_add_outlined),
-        shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.all(Radius.circular(8.0))),
+            ),
+            floatingActionButton: FloatingActionButton(
+              onPressed: () async {
+                isBookmarked
+                    ? await _removeFromFavorite()
+                    : await _addToFavorite(recipe.id!);
+              },
+              child: isBookmarked
+                  ? Icon(Icons.bookmark_added)
+                  : Icon(Icons.bookmark_add_outlined),
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.all(Radius.circular(8.0))),
+            ),
+          );
+        },
       ),
     );
   }
 
   Future<FoodRecipeDetail>? _fetchRecipeDetail(int id) async {
     return await api<ApiService>((request) => request.getRecipeDetail(id));
+  }
+
+  Future _checkFavoriteInfo(int recipeId) async {
+    FavoriteInfo favoriteInfo = await checkFavoriteRecipe(recipeId);
+    isBookmarked = favoriteInfo.isBookmarked;
+    favoriteId = favoriteInfo.favoriteId;
+  }
+
+  Future<void> _addToFavorite(int recipeId) async {
+    ProfileMe profileMe =
+        await api<ApiService>((request) => request.getProfileMe());
+    await api<ApiService>(
+        (request) => request.addFavoriteRecipe(profileMe.id!, recipeId));
+    setState(() {
+      isBookmarked = !isBookmarked;
+    });
+    const snackBar = SnackBar(
+      content: Text('Resep Berhasil Ditambahkan!'),
+    );
+    await ScaffoldMessenger.of(context).showSnackBar(snackBar);
+  }
+
+  Future<void> _removeFromFavorite() async {
+    await api<ApiService>(
+        (request) => request.removeFavoriteRecipe(favoriteId));
+    setState(() {
+      isBookmarked = !isBookmarked;
+    });
+    const snackBar = SnackBar(
+      content: Text('Resep Berhasil Dihapus!'),
+    );
+    await ScaffoldMessenger.of(context).showSnackBar(snackBar);
   }
 }
