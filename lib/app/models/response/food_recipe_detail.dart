@@ -18,7 +18,7 @@ class FoodRecipeDetail extends Model {
   FoodRecipeDetail();
 
   FoodRecipeDetail.fromJson(data) {
-    id = data['id'];
+    id = data['data']['id'];
     name = data['data']['attributes']['name'];
     age = data['data']['attributes']['age'];
     recipe_source = data['data']['attributes']['recipe_source'];
