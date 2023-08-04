@@ -91,6 +91,23 @@ class ApiService extends BaseApiService {
     );
   }
 
+  Future<void> requestResetPasswod(String email) async {
+    return await network(
+      request: (request) => request.post(
+        '/auth/forgot-password',
+        data: {'email': email},
+      ),
+      handleSuccess: (Response response) {
+        // response - Dio Response object
+        dynamic data = response.data;
+        if (data["ok"] == true) {
+          return true;
+        }
+        return false;
+      },
+    );
+  }
+
   displayError(DioException dioException, BuildContext context) {
     if (dioException.response != null) {
       showToastNotification(

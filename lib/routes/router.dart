@@ -5,6 +5,7 @@ import 'package:flutter_app/resources/pages/food_recipe_detail_page.dart';
 import 'package:flutter_app/resources/pages/main_page.dart';
 import 'package:flutter_app/resources/pages/change_password_page.dart';
 import 'package:flutter_app/resources/pages/request_feature_page.dart';
+import 'package:flutter_app/resources/pages/request_forgot_password_page.dart';
 import 'package:flutter_app/resources/pages/theme_setting_page.dart';
 import '/resources/pages/register_page.dart';
 import '/resources/pages/login_page.dart';
@@ -22,6 +23,8 @@ appRouter() => nyRoutes((router) async {
       router.route(ChangePasswordPage.path, (context) => ChangePasswordPage());
       router.route(ContactHelperPage.path, (context) => ContactHelperPage());
       router.route(RequestFeaturePage.path, (context) => RequestFeaturePage());
+      router.route(RequestForgotPasswordPage.path,
+          (context) => RequestForgotPasswordPage());
       router.route(AboutAppPage.path, (context) => AboutAppPage());
       router.route(
         MainPage.path,
