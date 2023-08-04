@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app/app/models/user.dart';
+import 'package:flutter_app/app/networking/api_service.dart';
 import 'package:flutter_app/bootstrap/helpers.dart';
 import 'package:flutter_app/resources/themes/text_theme/default_text_theme.dart';
 import 'package:flutter_app/resources/widgets/custom_scaffold_widget.dart';
@@ -223,7 +225,17 @@ class _ChangePasswordPageState extends NyState<ChangePasswordPage> {
       },
       onSuccess: () async {
         setLoading(true, name: 'changePassword');
-        Future.delayed(Duration(seconds: 3));
+        User? user = await api<ApiService>(
+            (request) =>
+                request.changePassword(currentPassword, userNewPassword),
+            context: context);
+        if (user != null) {
+          const snackBar = SnackBar(
+            content: Text('Kata Sandi berhasil diubah!'),
+          );
+          await ScaffoldMessenger.of(context).showSnackBar(snackBar);
+          Navigator.pop(context);
+        }
         setLoading(false, name: 'changePassword');
       },
     );

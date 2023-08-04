@@ -78,6 +78,19 @@ class ApiService extends BaseApiService {
     return await network(request: (request) => request.get('/users/me'));
   }
 
+  Future<User?> changePassword(String oldPassword, String newPassword) async {
+    return await network(
+      request: (request) => request.post(
+        '/auth/change-password',
+        data: {
+          'currentPassword': oldPassword,
+          'password': newPassword,
+          'passwordConfirmation': newPassword,
+        },
+      ),
+    );
+  }
+
   displayError(DioException dioException, BuildContext context) {
     if (dioException.response != null) {
       showToastNotification(
