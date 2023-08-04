@@ -23,6 +23,7 @@ dependencies:
   flutter_expanded_tile: ^0.3.7
   flutter_localizations:
     sdk: flutter
+  flutter_markdown: ^0.6.17
   flutter_svg: ^2.0.7
   google_fonts: ^5.0.0
   horizontal_picker: ^1.2.0
