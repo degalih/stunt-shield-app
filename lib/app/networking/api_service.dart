@@ -108,6 +108,31 @@ class ApiService extends BaseApiService {
     );
   }
 
+  Future<void> registerUser(
+      String firstNameController,
+      String lastNameController,
+      String emailController,
+      String passwordController) async {
+    return await network(
+      request: (request) => request.post(
+        '/auth/local/register',
+        data: {
+          "firstName": firstNameController,
+          "lastName": lastNameController,
+          "username": emailController,
+          "password": passwordController,
+          "email": emailController
+        },
+      ),
+      handleSuccess: (Response response) {
+        if (response.statusCode == 200) {
+          return true;
+        }
+        return false;
+      },
+    );
+  }
+
   displayError(DioException dioException, BuildContext context) {
     if (dioException.response != null) {
       showToastNotification(
