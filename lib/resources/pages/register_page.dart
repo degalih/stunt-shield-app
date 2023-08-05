@@ -1,5 +1,6 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_app/app/networking/api_service.dart';
 import 'package:flutter_app/bootstrap/helpers.dart';
 import 'package:flutter_app/resources/pages/login_page.dart';
 import 'package:flutter_app/resources/themes/text_theme/default_text_theme.dart';
@@ -283,20 +284,50 @@ class _RegisterPageState extends NyState<RegisterPage> {
                   ),
                 ),
                 SizedBox(height: 16.0),
-                ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                    elevation: 2.0,
-                    minimumSize: const Size.fromHeight(50),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(8.0),
-                    ),
-                  ),
-                  onPressed: () {},
-                  child: Text(
-                    'Daftar',
-                    style: defaultTextTheme.labelLarge,
-                  ),
-                ),
+                isLoading(name: 'loadButton')
+                    ? ElevatedButton.icon(
+                        icon: Container(
+                          width: 24,
+                          height: 24,
+                          padding: const EdgeInsets.all(2.0),
+                          child: const CircularProgressIndicator(
+                            color: Colors.white,
+                            strokeWidth: 3,
+                          ),
+                        ),
+                        style: ElevatedButton.styleFrom(
+                          elevation: 2.0,
+                          minimumSize: const Size.fromHeight(50),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(8.0),
+                          ),
+                        ),
+                        onPressed: () {},
+                        label: Text(
+                          'Loading...',
+                          style: defaultTextTheme.labelLarge,
+                        ),
+                      )
+                    : ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                          elevation: 2.0,
+                          minimumSize: const Size.fromHeight(50),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(8.0),
+                          ),
+                        ),
+                        onPressed: () {
+                          _register(
+                              _firstNameController.text,
+                              _lastNameController.text,
+                              _emailController.text,
+                              _passwordController.text);
+                        },
+                        child: Text(
+                          'Daftar',
+                          style: defaultTextTheme.labelLarge,
+                        ),
+                      ),
                 SizedBox(height: 16.0),
                 RichText(
                   textAlign: TextAlign.center,
@@ -329,5 +360,22 @@ class _RegisterPageState extends NyState<RegisterPage> {
         ),
       ),
     );
+  }
+
+  Future<void> _register(String firstNameController, String lastNameController,
+      String emailController, String passwordController) async {
+    setLoading(true, name: 'loadButton');
+    if (await api<ApiService>(
+            (request) => request.registerUser(firstNameController,
+                lastNameController, emailController, passwordController),
+            context: context) ==
+        true) {
+      const snackBar = SnackBar(
+        content: Text('Pendaftaran akun berhasil, silahkan login'),
+      );
+      setLoading(false, name: 'loadButton');
+      await ScaffoldMessenger.of(context).showSnackBar(snackBar);
+      routeTo(LoginPage.path, navigationType: NavigationType.pushReplace);
+    }
   }
 }

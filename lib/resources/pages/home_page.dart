@@ -62,9 +62,48 @@ class _HomePageState extends NyState<HomePage> {
                           context,
                           (color) =>
                               _darkMode == true ? color.grey50 : color.grey600),
-                  SizedBox(
-                    height: 32.0,
+                  SizedBox(height: 16.0),
+                  RichText(
+                    textAlign: TextAlign.center,
+                    text: TextSpan(
+                      style: defaultTextTheme.bodySmall,
+                      children: [
+                        TextSpan(
+                          style:
+                              TextStyle(color: ThemeColor.get(context).grey600),
+                          text: 'Kolaborasi ',
+                        ),
+                        WidgetSpan(
+                          alignment: PlaceholderAlignment.middle,
+                          child: Image.network(
+                            'https://res.cloudinary.com/stunt-shield-cloudinary/image/upload/v1691175747/Stunt%20Shield%20App%20Assets/Logo_ITG_hgblyi.png',
+                            height: 24.0,
+                          ),
+                        ),
+                        TextSpan(
+                          style:
+                              TextStyle(color: ThemeColor.get(context).grey600),
+                          text: ' Institut Teknologi Garut',
+                        ),
+                        TextSpan(
+                            style: TextStyle(
+                                color: ThemeColor.get(context).grey600),
+                            text: ' dengan '),
+                        WidgetSpan(
+                          alignment: PlaceholderAlignment.middle,
+                          child: Image.network(
+                            'https://res.cloudinary.com/stunt-shield-cloudinary/image/upload/v1691175745/Stunt%20Shield%20App%20Assets/Logo_KICS_znhurt.jpg',
+                            height: 24.0,
+                          ),
+                        ),
+                        TextSpan(
+                            style: TextStyle(
+                                color: ThemeColor.get(context).grey600),
+                            text: ' Komunitas Ibu Cegah Stunting (KICS)'),
+                      ],
+                    ),
                   ),
+                  SizedBox(height: 32.0),
                   ElevatedButton(
                     style: ElevatedButton.styleFrom(
                         elevation: 2.0,
