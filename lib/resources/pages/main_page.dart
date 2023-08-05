@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_app/resources/widgets/bookmark_recipe_widget.dart';
-import 'package:flutter_app/resources/widgets/food_recipe_widget.dart';
-import 'package:flutter_app/resources/widgets/nutrition_calculator_widget.dart';
-import 'package:flutter_app/resources/widgets/profile_widget.dart';
-import 'package:flutter_app/resources/widgets/search_recipe_widget.dart';
+import 'package:stunt_shield_app/resources/widgets/bookmark_recipe_widget.dart';
+import 'package:stunt_shield_app/resources/widgets/food_recipe_widget.dart';
+import 'package:stunt_shield_app/resources/widgets/nutrition_calculator_widget.dart';
+import 'package:stunt_shield_app/resources/widgets/profile_widget.dart';
+import 'package:stunt_shield_app/resources/widgets/search_recipe_widget.dart';
 import 'package:nylo_framework/nylo_framework.dart';
 import 'package:salomon_bottom_bar/salomon_bottom_bar.dart';
 import '/app/controllers/controller.dart';

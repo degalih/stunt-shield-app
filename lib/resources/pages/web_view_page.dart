@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_app/app/models/web_view_target.dart';
-import 'package:flutter_app/bootstrap/helpers.dart';
+import 'package:stunt_shield_app/app/models/web_view_target.dart';
+import 'package:stunt_shield_app/bootstrap/helpers.dart';
 import 'package:nylo_framework/nylo_framework.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 import '/app/controllers/controller.dart';

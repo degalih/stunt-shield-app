@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_app/app/utils/nutritions_status.dart';
-import 'package:flutter_app/bootstrap/helpers.dart';
-import 'package:flutter_app/resources/themes/text_theme/default_text_theme.dart';
-import 'package:flutter_app/resources/widgets/nutrition_card_status_widget.dart';
+import 'package:stunt_shield_app/app/utils/nutritions_status.dart';
+import 'package:stunt_shield_app/bootstrap/helpers.dart';
+import 'package:stunt_shield_app/resources/themes/text_theme/default_text_theme.dart';
+import 'package:stunt_shield_app/resources/widgets/nutrition_card_status_widget.dart';
 import 'package:horizontal_picker/horizontal_picker.dart';
 import 'package:numberpicker/numberpicker.dart';
 import 'package:nylo_framework/nylo_framework.dart';

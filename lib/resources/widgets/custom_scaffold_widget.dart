@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_app/resources/themes/text_theme/default_text_theme.dart';
-import 'package:flutter_app/resources/widgets/custom_back_button_widget.dart';
+import 'package:stunt_shield_app/resources/themes/text_theme/default_text_theme.dart';
+import 'package:stunt_shield_app/resources/widgets/custom_back_button_widget.dart';
 
 class CustomScaffold extends StatelessWidget {
   const CustomScaffold({Key? key, required this.title, required this.child})

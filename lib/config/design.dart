@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_app/resources/widgets/loader_widget.dart';
-import 'package:flutter_app/resources/widgets/logo_widget.dart';
+import 'package:stunt_shield_app/resources/widgets/loader_widget.dart';
+import 'package:stunt_shield_app/resources/widgets/logo_widget.dart';
 
 /*
 |--------------------------------------------------------------------------

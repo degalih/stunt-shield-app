@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_app/app/models/response/profile_me.dart';
-import 'package:flutter_app/app/networking/api_service.dart';
-import 'package:flutter_app/bootstrap/helpers.dart';
-import 'package:flutter_app/resources/pages/about_app_page.dart';
-import 'package:flutter_app/resources/pages/change_password_page.dart';
-import 'package:flutter_app/resources/pages/contact_helper_page.dart';
-import 'package:flutter_app/resources/pages/home_page.dart';
-import 'package:flutter_app/resources/pages/request_feature_page.dart';
-import 'package:flutter_app/resources/pages/theme_setting_page.dart';
-import 'package:flutter_app/resources/themes/text_theme/default_text_theme.dart';
-import 'package:flutter_app/resources/widgets/profile_card_button_widget.dart';
+import 'package:stunt_shield_app/app/models/response/profile_me.dart';
+import 'package:stunt_shield_app/app/networking/api_service.dart';
+import 'package:stunt_shield_app/bootstrap/helpers.dart';
+import 'package:stunt_shield_app/resources/pages/about_app_page.dart';
+import 'package:stunt_shield_app/resources/pages/change_password_page.dart';
+import 'package:stunt_shield_app/resources/pages/contact_helper_page.dart';
+import 'package:stunt_shield_app/resources/pages/home_page.dart';
+import 'package:stunt_shield_app/resources/pages/request_feature_page.dart';
+import 'package:stunt_shield_app/resources/pages/theme_setting_page.dart';
+import 'package:stunt_shield_app/resources/themes/text_theme/default_text_theme.dart';
+import 'package:stunt_shield_app/resources/widgets/profile_card_button_widget.dart';
 import 'package:nylo_framework/nylo_framework.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 

@@ -4,8 +4,8 @@
 # Official repository: https://github.com/nylo-core/nylo
 # Author: Anthony Gordon <https://github.com/agordn52>
 
-name: flutter_app
-description: A new Nylo Flutter application.
+name: stunt_shield_app
+description: Aplikasi resep makanan bergizi untuk balita
 
 publish_to: "none" # Remove this line if you wish to publish to pub.dev
 

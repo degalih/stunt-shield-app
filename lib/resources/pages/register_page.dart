@@ -1,10 +1,10 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_app/app/networking/api_service.dart';
-import 'package:flutter_app/bootstrap/helpers.dart';
-import 'package:flutter_app/resources/pages/login_page.dart';
-import 'package:flutter_app/resources/themes/text_theme/default_text_theme.dart';
-import 'package:flutter_app/resources/widgets/safearea_widget.dart';
+import 'package:stunt_shield_app/app/networking/api_service.dart';
+import 'package:stunt_shield_app/bootstrap/helpers.dart';
+import 'package:stunt_shield_app/resources/pages/login_page.dart';
+import 'package:stunt_shield_app/resources/themes/text_theme/default_text_theme.dart';
+import 'package:stunt_shield_app/resources/widgets/safearea_widget.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:nylo_framework/nylo_framework.dart';
 import '/app/controllers/controller.dart';

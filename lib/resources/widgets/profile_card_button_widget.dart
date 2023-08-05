@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_app/bootstrap/helpers.dart';
-import 'package:flutter_app/resources/themes/text_theme/default_text_theme.dart';
+import 'package:stunt_shield_app/bootstrap/helpers.dart';
+import 'package:stunt_shield_app/resources/themes/text_theme/default_text_theme.dart';
 import 'package:nylo_framework/nylo_framework.dart';
 
 class ProfileCardButton extends StatelessWidget {

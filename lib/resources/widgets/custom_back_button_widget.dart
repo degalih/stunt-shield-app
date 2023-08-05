@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_app/bootstrap/helpers.dart';
+import 'package:stunt_shield_app/bootstrap/helpers.dart';
 
 class CustomBackButton extends StatelessWidget {
   const CustomBackButton({Key? key}) : super(key: key);

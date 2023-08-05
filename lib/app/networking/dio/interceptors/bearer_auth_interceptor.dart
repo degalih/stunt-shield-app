@@ -1,4 +1,4 @@
-import 'package:flutter_app/app/models/user.dart';
+import 'package:stunt_shield_app/app/models/user.dart';
 import 'package:nylo_framework/nylo_framework.dart';
 
 class BearerAuthInterceptor extends Interceptor {

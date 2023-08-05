@@ -1,12 +1,12 @@
-import 'package:flutter_app/app/models/response/favorite_id.dart';
-import 'package:flutter_app/app/models/response/food_recipe_favorite.dart';
-import 'package:flutter_app/app/models/response/profile_me.dart';
+import 'package:stunt_shield_app/app/models/response/favorite_id.dart';
+import 'package:stunt_shield_app/app/models/response/food_recipe_favorite.dart';
+import 'package:stunt_shield_app/app/models/response/profile_me.dart';
 
 import '../app/models/response/food_recipe_search_result.dart';
 import '../app/models/response/food_recipe_detail.dart';
-import 'package:flutter_app/app/models/response/food_recipe_list.dart';
-import 'package:flutter_app/app/models/user.dart';
-import 'package:flutter_app/app/networking/dio/base_api_service.dart';
+import 'package:stunt_shield_app/app/models/response/food_recipe_list.dart';
+import 'package:stunt_shield_app/app/models/user.dart';
+import 'package:stunt_shield_app/app/networking/dio/base_api_service.dart';
 import '/app/networking/api_service.dart';
 
 final Map<Type, dynamic> modelDecoders = {

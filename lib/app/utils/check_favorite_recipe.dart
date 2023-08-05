@@ -1,7 +1,7 @@
-import 'package:flutter_app/app/models/favorite_info.dart';
-import 'package:flutter_app/app/models/response/food_recipe_favorite.dart';
-import 'package:flutter_app/app/networking/api_service.dart';
-import 'package:flutter_app/bootstrap/helpers.dart';
+import 'package:stunt_shield_app/app/models/favorite_info.dart';
+import 'package:stunt_shield_app/app/models/response/food_recipe_favorite.dart';
+import 'package:stunt_shield_app/app/networking/api_service.dart';
+import 'package:stunt_shield_app/bootstrap/helpers.dart';
 
 Future<FavoriteInfo> checkFavoriteRecipe(int recipeDetailId) async {
   List<FoodRecipeFavorite> foodRecipeFavorite =

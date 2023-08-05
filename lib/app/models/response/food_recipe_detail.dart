@@ -1,4 +1,4 @@
-import 'package:flutter_app/app/models/nutritions.dart';
+import 'package:stunt_shield_app/app/models/nutritions.dart';
 import 'package:nylo_framework/nylo_framework.dart';
 
 /// FoodRecipeDetail Model.

@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_app/app/models/response/food_recipe_favorite.dart';
-import 'package:flutter_app/app/networking/api_service.dart';
-import 'package:flutter_app/bootstrap/helpers.dart';
-import 'package:flutter_app/resources/pages/food_recipe_detail_page.dart';
-import 'package:flutter_app/resources/themes/text_theme/default_text_theme.dart';
-import 'package:flutter_app/resources/widgets/loader_widget.dart';
+import 'package:stunt_shield_app/app/models/response/food_recipe_favorite.dart';
+import 'package:stunt_shield_app/app/networking/api_service.dart';
+import 'package:stunt_shield_app/bootstrap/helpers.dart';
+import 'package:stunt_shield_app/resources/pages/food_recipe_detail_page.dart';
+import 'package:stunt_shield_app/resources/themes/text_theme/default_text_theme.dart';
+import 'package:stunt_shield_app/resources/widgets/loader_widget.dart';
 import 'package:nylo_framework/nylo_framework.dart';
 
 class BookmarkRecipe extends StatefulWidget {
