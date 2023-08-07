@@ -16,6 +16,8 @@ class FoodRecipe extends StatefulWidget {
 }
 
 class _FoodRecipeState extends NyState<FoodRecipe> {
+  bool _isDarkMode = Backpack.instance.read('isDarkmode') ?? false;
+
   final _scrollController = ScrollController();
   int page = 1;
   bool hasMore = true;
@@ -44,7 +46,9 @@ class _FoodRecipeState extends NyState<FoodRecipe> {
     return RefreshIndicator(
       onRefresh: _refreshRecipes,
       child: Container(
-        color: ThemeColor.get(context).grey50,
+        color: _isDarkMode
+            ? ThemeColor.get(context).dark100
+            : ThemeColor.get(context).grey50,
         child: CustomScrollView(
           controller: _scrollController,
           slivers: [
@@ -52,10 +56,14 @@ class _FoodRecipeState extends NyState<FoodRecipe> {
               titleSpacing: 24,
               title: Text(
                 'Mau Masak Apa Hari Ini?',
-                style: defaultTextTheme.titleLarge!
-                    .copyWith(color: ThemeColor.get(context).black),
+                style: defaultTextTheme.titleLarge!.copyWith(
+                    color: _isDarkMode
+                        ? ThemeColor.get(context).white
+                        : ThemeColor.get(context).black),
               ),
-              backgroundColor: ThemeColor.get(context).grey50,
+              backgroundColor: _isDarkMode
+                  ? ThemeColor.get(context).dark100
+                  : ThemeColor.get(context).grey50,
             ),
             SliverPadding(
               padding: EdgeInsets.symmetric(horizontal: 20.0),
@@ -75,8 +83,12 @@ class _FoodRecipeState extends NyState<FoodRecipe> {
                         routeTo(FoodRecipeDetailPage.path, data: recipe.id);
                       },
                       child: Card(
-                        color: ThemeColor.get(context).white,
-                        surfaceTintColor: ThemeColor.get(context).white,
+                        color: _isDarkMode
+                            ? ThemeColor.get(context).dark200
+                            : ThemeColor.get(context).white,
+                        surfaceTintColor: _isDarkMode
+                            ? ThemeColor.get(context).dark200
+                            : ThemeColor.get(context).white,
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: <Widget>[
@@ -134,7 +146,10 @@ class _FoodRecipeState extends NyState<FoodRecipe> {
                                   horizontal: 8.0, vertical: 4.0),
                               child: Text(
                                 recipe.name ?? '-',
-                                style: defaultTextTheme.bodySmall,
+                                style: defaultTextTheme.bodySmall!.copyWith(
+                                    color: _isDarkMode
+                                        ? ThemeColor.get(context).white
+                                        : ThemeColor.get(context).black),
                                 overflow: TextOverflow.ellipsis,
                                 maxLines: 2,
                               ),
@@ -157,8 +172,11 @@ class _FoodRecipeState extends NyState<FoodRecipe> {
                                         style: defaultTextTheme.labelSmall!
                                             .copyWith(
                                                 fontWeight: FontWeight.w600,
-                                                color: ThemeColor.get(context)
-                                                    .grey700),
+                                                color: _isDarkMode
+                                                    ? ThemeColor.get(context)
+                                                        .grey300
+                                                    : ThemeColor.get(context)
+                                                        .grey700),
                                       )
                                     ],
                                   ),
@@ -173,8 +191,11 @@ class _FoodRecipeState extends NyState<FoodRecipe> {
                                         style: defaultTextTheme.labelSmall!
                                             .copyWith(
                                                 fontWeight: FontWeight.w600,
-                                                color: ThemeColor.get(context)
-                                                    .grey700),
+                                                color: _isDarkMode
+                                                    ? ThemeColor.get(context)
+                                                        .grey300
+                                                    : ThemeColor.get(context)
+                                                        .grey700),
                                       )
                                     ],
                                   ),
@@ -189,8 +210,11 @@ class _FoodRecipeState extends NyState<FoodRecipe> {
                                         style: defaultTextTheme.labelSmall!
                                             .copyWith(
                                                 fontWeight: FontWeight.w600,
-                                                color: ThemeColor.get(context)
-                                                    .grey700),
+                                                color: _isDarkMode
+                                                    ? ThemeColor.get(context)
+                                                        .grey300
+                                                    : ThemeColor.get(context)
+                                                        .grey700),
                                       )
                                     ],
                                   ),
@@ -205,8 +229,11 @@ class _FoodRecipeState extends NyState<FoodRecipe> {
                                         style: defaultTextTheme.labelSmall!
                                             .copyWith(
                                                 fontWeight: FontWeight.w600,
-                                                color: ThemeColor.get(context)
-                                                    .grey700),
+                                                color: _isDarkMode
+                                                    ? ThemeColor.get(context)
+                                                        .grey300
+                                                    : ThemeColor.get(context)
+                                                        .grey700),
                                       )
                                     ],
                                   ),
