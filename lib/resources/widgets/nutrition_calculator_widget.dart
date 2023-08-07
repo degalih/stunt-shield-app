@@ -15,6 +15,7 @@ class NutritionCalculator extends StatefulWidget {
 }
 
 class _NutritionCalculatorState extends NyState<NutritionCalculator> {
+  bool _isDarkMode = Backpack.instance.read('isDarkmode') ?? false;
   int selected = 0;
   String _currentGender = 'Male';
   double _currentHeight = 0;
@@ -50,7 +51,9 @@ class _NutritionCalculatorState extends NyState<NutritionCalculator> {
               style: defaultTextTheme.bodyMedium!.copyWith(
                 color: (selected == index)
                     ? ThemeColor.get(context).green
-                    : ThemeColor.get(context).black,
+                    : _isDarkMode
+                        ? ThemeColor.get(context).white
+                        : ThemeColor.get(context).black,
               ),
             ),
           ],
@@ -86,7 +89,10 @@ class _NutritionCalculatorState extends NyState<NutritionCalculator> {
           children: <Widget>[
             Text(
               'Kalkulator Gizi Stunting',
-              style: defaultTextTheme.titleLarge,
+              style: defaultTextTheme.titleLarge!.copyWith(
+                  color: _isDarkMode
+                      ? ThemeColor.get(context).white
+                      : ThemeColor.get(context).black),
             ),
             SizedBox(height: 16.0),
             Row(
@@ -110,7 +116,10 @@ class _NutritionCalculatorState extends NyState<NutritionCalculator> {
                 children: [
                   Text(
                     'Panjang/Tinggi Badan (cm)',
-                    style: defaultTextTheme.bodySmall,
+                    style: defaultTextTheme.bodySmall!.copyWith(
+                        color: _isDarkMode
+                            ? ThemeColor.get(context).white
+                            : ThemeColor.get(context).black),
                   ),
                   HorizontalPicker(
                     minValue: 20,
@@ -118,6 +127,9 @@ class _NutritionCalculatorState extends NyState<NutritionCalculator> {
                     divisions: 120,
                     activeItemTextColor: ThemeColor.get(context).green,
                     passiveItemsTextColor: ThemeColor.get(context).grey400,
+                    backgroundColor: _isDarkMode
+                        ? ThemeColor.get(context).dark100
+                        : ThemeColor.get(context).white,
                     height: 100,
                     suffix: " cm",
                     showCursor: false,
