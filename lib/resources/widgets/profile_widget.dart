@@ -21,6 +21,7 @@ class Profile extends StatefulWidget {
 }
 
 class _ProfileState extends NyState<Profile> {
+  bool _isDarkMode = Backpack.instance.read('isDarkmode') ?? false;
   String appVersion = '-';
   @override
   init() async {
@@ -32,7 +33,9 @@ class _ProfileState extends NyState<Profile> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: ThemeColor.get(context).grey100,
+      backgroundColor: _isDarkMode
+          ? ThemeColor.get(context).dark100
+          : ThemeColor.get(context).grey100,
       body: NyFutureBuilder(
           future: _fetchProfileData(),
           child: (context, data) {
@@ -42,7 +45,10 @@ class _ProfileState extends NyState<Profile> {
               children: <Widget>[
                 Text(
                   'Profil Saya',
-                  style: defaultTextTheme.titleLarge,
+                  style: defaultTextTheme.titleLarge!.copyWith(
+                      color: _isDarkMode
+                          ? ThemeColor.get(context).white
+                          : ThemeColor.get(context).black),
                 ),
                 SizedBox(height: 16.0),
                 Container(
@@ -54,9 +60,13 @@ class _ProfileState extends NyState<Profile> {
                       Container(
                         height: 0.2 * MediaQuery.of(context).size.height,
                         child: Card(
-                          surfaceTintColor: ThemeColor.get(context).white,
+                          surfaceTintColor: _isDarkMode
+                              ? ThemeColor.get(context).dark200
+                              : ThemeColor.get(context).white,
                           elevation: 8.0,
-                          color: ThemeColor.get(context).white,
+                          color: _isDarkMode
+                              ? ThemeColor.get(context).dark200
+                              : ThemeColor.get(context).white,
                           child: ListTile(
                             title: Center(
                               child: Padding(
@@ -73,8 +83,11 @@ class _ProfileState extends NyState<Profile> {
                                     Text('${profileMe.email}',
                                         style: defaultTextTheme.titleMedium!
                                             .copyWith(
-                                                color: ThemeColor.get(context)
-                                                    .grey600)),
+                                                color: _isDarkMode
+                                                    ? ThemeColor.get(context)
+                                                        .grey300
+                                                    : ThemeColor.get(context)
+                                                        .grey600)),
                                   ],
                                 ),
                               ),
@@ -128,7 +141,9 @@ class _ProfileState extends NyState<Profile> {
                   child: Text(
                     'Versi Aplikasi $appVersion',
                     style: defaultTextTheme.titleSmall!.copyWith(
-                        color: ThemeColor.get(context).grey600,
+                        color: _isDarkMode
+                            ? ThemeColor.get(context).grey300
+                            : ThemeColor.get(context).grey600,
                         fontWeight: FontWeight.bold),
                   ),
                 ),

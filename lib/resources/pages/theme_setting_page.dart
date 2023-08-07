@@ -18,7 +18,7 @@ class ThemeSettingPage extends NyStatefulWidget {
 }
 
 class _ThemeSettingPageState extends NyState<ThemeSettingPage> {
-  bool isDarkMode = false;
+  bool _isDarkMode = Backpack.instance.read('isDarkmode') ?? false;
   @override
   init() async {
     super.init();
@@ -32,6 +32,9 @@ class _ThemeSettingPageState extends NyState<ThemeSettingPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: _isDarkMode
+          ? ThemeColor.get(context).dark100
+          : ThemeColor.get(context).white,
       body: SafeArea(
         child: Container(
           padding: EdgeInsets.all(20.0),
@@ -42,22 +45,33 @@ class _ThemeSettingPageState extends NyState<ThemeSettingPage> {
                 leading: CustomBackButton(),
                 title: Text(
                   'Tema Aplikasi',
-                  style: defaultTextTheme.titleLarge,
+                  style: defaultTextTheme.titleLarge!.copyWith(
+                      color: _isDarkMode
+                          ? ThemeColor.get(context).white
+                          : ThemeColor.get(context).black),
                 ),
               ),
               SizedBox(
                 height: 16.0,
               ),
               Card(
-                surfaceTintColor: ThemeColor.get(context).white,
+                surfaceTintColor: _isDarkMode
+                    ? ThemeColor.get(context).dark300
+                    : ThemeColor.get(context).white,
+                color: _isDarkMode
+                    ? ThemeColor.get(context).dark300
+                    : ThemeColor.get(context).white,
                 elevation: 4,
                 child: SwitchListTile(
-                  title: Text('Terang'),
-                  value: isDarkMode,
-                  onChanged: (bool value) {
-                    isDarkMode = value;
+                  activeColor: ThemeColor.get(context).green500,
+                  title: _isDarkMode ? Text('Gelap') : Text('Terang'),
+                  value: _isDarkMode,
+                  onChanged: (bool value) async {
+                    _isDarkMode = value;
+                    await NyStorage.store('isDarkmode', value,
+                        inBackpack: true);
                     NyTheme.set(context,
-                        id: getEnv(isDarkMode == true
+                        id: getEnv(Backpack.instance.read('isDarkmode') == true
                             ? 'DARK_THEME_ID'
                             : 'LIGHT_THEME_ID'));
                     setState(() {});

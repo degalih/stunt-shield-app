@@ -17,8 +17,14 @@ class ProfileCardButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    bool _isDarkMode = Backpack.instance.read('isDarkmode') ?? false;
     return Card(
-      surfaceTintColor: ThemeColor.get(context).white,
+      surfaceTintColor: _isDarkMode
+          ? ThemeColor.get(context).dark200
+          : ThemeColor.get(context).white,
+      color: _isDarkMode
+          ? ThemeColor.get(context).dark200
+          : ThemeColor.get(context).white,
       child: ListTile(
         leading: Image.network(
           imgUrl,
@@ -27,13 +33,17 @@ class ProfileCardButton extends StatelessWidget {
         title: Text(
           title,
           style: defaultTextTheme.bodySmall!.copyWith(
-            color: ThemeColor.get(context).grey500,
+            color: _isDarkMode
+                ? ThemeColor.get(context).grey300
+                : ThemeColor.get(context).grey500,
             fontWeight: FontWeight.w600,
           ),
         ),
         trailing: Icon(
           Icons.arrow_forward_ios,
-          color: ThemeColor.get(context).grey500,
+          color: _isDarkMode
+              ? ThemeColor.get(context).grey300
+              : ThemeColor.get(context).grey500,
         ),
         onTap: () {
           routeTo(routePath);

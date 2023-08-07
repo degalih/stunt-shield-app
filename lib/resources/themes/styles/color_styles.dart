@@ -77,8 +77,8 @@ class ColorStyles {
   Color get red900 => Color(0xFFB71B1C);
 
 // Dark Mode Shade
-  Color get dark100 => Color(0xFF171F19);
-  Color get dark200 => Color(0xFF2C342E);
+  Color get dark100 => Color(0xFF1b2d20);
+  Color get dark200 => Color(0xFF314135);
   Color get dark300 => Color(0xFF434A44);
   Color get dark400 => Color(0xFF5B615C);
   Color get dark500 => Color(0xFF747975);
