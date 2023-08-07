@@ -21,7 +21,6 @@ class Profile extends StatefulWidget {
 }
 
 class _ProfileState extends NyState<Profile> {
-  bool _isDarkMode = Backpack.instance.read('isDarkmode') ?? false;
   String appVersion = '-';
   @override
   init() async {
@@ -32,6 +31,7 @@ class _ProfileState extends NyState<Profile> {
 
   @override
   Widget build(BuildContext context) {
+    bool _isDarkMode = Backpack.instance.read('isDarkmode') ?? false;
     return Scaffold(
       backgroundColor: _isDarkMode
           ? ThemeColor.get(context).dark100
