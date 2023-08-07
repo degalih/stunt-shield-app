@@ -15,6 +15,7 @@ class SearchRecipe extends StatefulWidget {
 }
 
 class _SearchRecipeState extends NyState<SearchRecipe> {
+  bool _isDarkMode = Backpack.instance.read('isDarkmode') ?? false;
   List<FoodRecipeSearchResult> recipes = [];
   bool isResultEmpty = false;
 
@@ -26,7 +27,9 @@ class _SearchRecipeState extends NyState<SearchRecipe> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: ThemeColor.get(context).grey50,
+      color: _isDarkMode
+          ? ThemeColor.get(context).dark100
+          : ThemeColor.get(context).grey50,
       child: Padding(
         padding: const EdgeInsets.fromLTRB(20.0, 40.0, 20.0, 0),
         child: Column(
@@ -35,7 +38,10 @@ class _SearchRecipeState extends NyState<SearchRecipe> {
           children: <Widget>[
             Text(
               'Cari Resep Makanan Disini',
-              style: defaultTextTheme.titleLarge,
+              style: defaultTextTheme.titleLarge!.copyWith(
+                  color: _isDarkMode
+                      ? ThemeColor.get(context).white
+                      : ThemeColor.get(context).black),
             ),
             SizedBox(
               height: 16.0,
@@ -43,17 +49,23 @@ class _SearchRecipeState extends NyState<SearchRecipe> {
             TextField(
               decoration: InputDecoration(
                 filled: true,
-                fillColor: ThemeColor.get(context).grey200,
+                fillColor: _isDarkMode
+                    ? ThemeColor.get(context).dark200
+                    : ThemeColor.get(context).grey200,
                 border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(8.0),
                     borderSide: BorderSide.none),
                 hintText: 'ex: Bubur',
-                hintStyle: defaultTextTheme.bodySmall!
-                    .copyWith(color: ThemeColor.get(context).grey600),
+                hintStyle: defaultTextTheme.bodySmall!.copyWith(
+                    color: _isDarkMode
+                        ? ThemeColor.get(context).white
+                        : ThemeColor.get(context).grey600),
                 prefixIcon: Icon(
                   Icons.search,
                 ),
-                prefixIconColor: ThemeColor.get(context).grey600,
+                prefixIconColor: _isDarkMode
+                    ? ThemeColor.get(context).white
+                    : ThemeColor.get(context).grey600,
               ),
               onSubmitted: (query) {
                 _fetchSearchRecipe(query);
@@ -76,7 +88,12 @@ class _SearchRecipeState extends NyState<SearchRecipe> {
                                   data: recipe.id);
                             },
                             child: Card(
-                              surfaceTintColor: ThemeColor.get(context).white,
+                              surfaceTintColor: _isDarkMode
+                                  ? ThemeColor.get(context).dark200
+                                  : ThemeColor.get(context).white,
+                              color: _isDarkMode
+                                  ? ThemeColor.get(context).dark200
+                                  : ThemeColor.get(context).white,
                               child: ListTile(
                                 contentPadding: EdgeInsets.all(8.0),
                                 leading: AspectRatio(
