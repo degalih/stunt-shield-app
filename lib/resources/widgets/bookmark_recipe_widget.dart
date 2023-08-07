@@ -15,6 +15,7 @@ class BookmarkRecipe extends StatefulWidget {
 }
 
 class _BookmarkRecipeState extends NyState<BookmarkRecipe> {
+  bool _isDarkMode = Backpack.instance.read('isDarkmode') ?? false;
   List<FoodRecipeFavorite> favoriteRecipes = [];
   bool isFavoriteEmpty = false;
 
@@ -33,7 +34,9 @@ class _BookmarkRecipeState extends NyState<BookmarkRecipe> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: ThemeColor.get(context).grey50,
+      color: _isDarkMode
+          ? ThemeColor.get(context).dark100
+          : ThemeColor.get(context).grey50,
       child: Padding(
         padding: const EdgeInsets.fromLTRB(20.0, 40.0, 20.0, 0),
         child: Column(
@@ -42,7 +45,11 @@ class _BookmarkRecipeState extends NyState<BookmarkRecipe> {
           children: <Widget>[
             Text(
               'Daftar Resep Makanan Favorit',
-              style: defaultTextTheme.titleLarge,
+              style: defaultTextTheme.titleLarge!.copyWith(
+                color: _isDarkMode
+                    ? ThemeColor.get(context).white
+                    : ThemeColor.get(context).black,
+              ),
             ),
             isLoading(name: 'loadFavoriteRecipes')
                 ? Expanded(child: Loader())
@@ -70,7 +77,12 @@ class _BookmarkRecipeState extends NyState<BookmarkRecipe> {
                               });
                             },
                             child: Card(
-                              surfaceTintColor: ThemeColor.get(context).white,
+                              surfaceTintColor: _isDarkMode
+                                  ? ThemeColor.get(context).dark200
+                                  : ThemeColor.get(context).white,
+                              color: _isDarkMode
+                                  ? ThemeColor.get(context).dark200
+                                  : ThemeColor.get(context).white,
                               child: ListTile(
                                 contentPadding: EdgeInsets.all(8.0),
                                 leading: AspectRatio(
