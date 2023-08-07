@@ -17,6 +17,8 @@ class ContactHelperPage extends NyStatefulWidget {
 }
 
 class _ContactHelperPageState extends NyState<ContactHelperPage> {
+  bool _isDarkMode = Backpack.instance.read('isDarkmode') ?? false;
+
   @override
   init() async {
     super.init();
@@ -37,8 +39,10 @@ class _ContactHelperPageState extends NyState<ContactHelperPage> {
           Text(
             'Butuh bantuan? Ingin berbicara dengan seseorang? Hubungi kami langsung melalui nomor telepon atau alamat email yang tertera. Kami senang mendengar suara Anda.',
             textAlign: TextAlign.justify,
-            style: defaultTextTheme.bodySmall!
-                .copyWith(color: ThemeColor.get(context).grey600),
+            style: defaultTextTheme.bodySmall!.copyWith(
+                color: _isDarkMode
+                    ? ThemeColor.get(context).grey300
+                    : ThemeColor.get(context).grey600),
           ),
           ListTile(
             horizontalTitleGap: 8,
@@ -46,12 +50,16 @@ class _ContactHelperPageState extends NyState<ContactHelperPage> {
             contentPadding: EdgeInsets.zero,
             leading: Icon(
               Icons.email_outlined,
-              color: ThemeColor.get(context).grey600,
+              color: _isDarkMode
+                  ? ThemeColor.get(context).grey300
+                  : ThemeColor.get(context).grey600,
             ),
             title: Text(
               'galihmramdan17@gmail.com',
-              style: defaultTextTheme.bodySmall!
-                  .copyWith(color: ThemeColor.get(context).grey600),
+              style: defaultTextTheme.bodySmall!.copyWith(
+                  color: _isDarkMode
+                      ? ThemeColor.get(context).grey300
+                      : ThemeColor.get(context).grey600),
             ),
           ),
           ListTile(
@@ -60,12 +68,16 @@ class _ContactHelperPageState extends NyState<ContactHelperPage> {
             contentPadding: EdgeInsets.zero,
             leading: Icon(
               Icons.phone_android_outlined,
-              color: ThemeColor.get(context).grey600,
+              color: _isDarkMode
+                  ? ThemeColor.get(context).grey300
+                  : ThemeColor.get(context).grey600,
             ),
             title: Text(
               '+6289674720241',
-              style: defaultTextTheme.bodySmall!
-                  .copyWith(color: ThemeColor.get(context).grey600),
+              style: defaultTextTheme.bodySmall!.copyWith(
+                  color: _isDarkMode
+                      ? ThemeColor.get(context).grey300
+                      : ThemeColor.get(context).grey600),
             ),
           ),
         ],
