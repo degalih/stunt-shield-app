@@ -28,6 +28,7 @@ class _FoodRecipeDetailPageState extends NyState<FoodRecipeDetailPage> {
   bool isBookmarked = false;
   int favoriteId = 0;
   int recipeId = 0;
+  bool _isDarkMode = Backpack.instance.read('isDarkmode') ?? false;
 
   @override
   init() async {
@@ -77,12 +78,20 @@ class _FoodRecipeDetailPageState extends NyState<FoodRecipeDetailPage> {
                           child: Container(
                             width: width - 40.0,
                             child: Card(
-                              surfaceTintColor: ThemeColor.get(context).white,
+                              surfaceTintColor: _isDarkMode
+                                  ? ThemeColor.get(context).dark100
+                                  : ThemeColor.get(context).white,
+                              color: _isDarkMode
+                                  ? ThemeColor.get(context).dark100
+                                  : ThemeColor.get(context).white,
                               child: ListTile(
                                 title: Text(
                                   recipe.name ?? '-',
-                                  style: defaultTextTheme.titleSmall!
-                                      .copyWith(fontWeight: FontWeight.bold),
+                                  style: defaultTextTheme.titleSmall!.copyWith(
+                                      fontWeight: FontWeight.bold,
+                                      color: _isDarkMode
+                                          ? ThemeColor.get(context).white
+                                          : ThemeColor.get(context).black),
                                   maxLines: 2,
                                   overflow: TextOverflow.ellipsis,
                                 ),
@@ -104,8 +113,11 @@ class _FoodRecipeDetailPageState extends NyState<FoodRecipeDetailPage> {
                                           recipe.recipe_source ?? '-',
                                           style: defaultTextTheme.labelSmall!
                                               .copyWith(
-                                            color:
-                                                ThemeColor.get(context).grey600,
+                                            color: _isDarkMode
+                                                ? ThemeColor.get(context)
+                                                    .grey300
+                                                : ThemeColor.get(context)
+                                                    .grey600,
                                           ),
                                         ),
                                       ],
@@ -139,8 +151,11 @@ class _FoodRecipeDetailPageState extends NyState<FoodRecipeDetailPage> {
                                           recipe.age ?? '-',
                                           style: defaultTextTheme.labelSmall!
                                               .copyWith(
-                                            color:
-                                                ThemeColor.get(context).grey600,
+                                            color: _isDarkMode
+                                                ? ThemeColor.get(context)
+                                                    .grey300
+                                                : ThemeColor.get(context)
+                                                    .grey600,
                                           ),
                                         ),
                                       ],
@@ -158,6 +173,12 @@ class _FoodRecipeDetailPageState extends NyState<FoodRecipeDetailPage> {
                 Container(
                   padding: EdgeInsets.fromLTRB(20.0, 60.0, 20.0, 0),
                   child: Card(
+                    color: _isDarkMode
+                        ? ThemeColor.get(context).dark200
+                        : ThemeColor.get(context).white,
+                    surfaceTintColor: _isDarkMode
+                        ? ThemeColor.get(context).dark200
+                        : ThemeColor.get(context).white,
                     shape: RoundedRectangleBorder(
                       borderRadius:
                           BorderRadius.circular(8), // if you need this
@@ -169,21 +190,33 @@ class _FoodRecipeDetailPageState extends NyState<FoodRecipeDetailPage> {
                     elevation: 0,
                     child: ExpandedTile(
                       contentseparator: 0.0,
-                      title: Text('Bahan - Bahan'),
+                      title: Text(
+                        'Bahan - Bahan',
+                        style: defaultTextTheme.bodyMedium!.copyWith(
+                            color: _isDarkMode
+                                ? ThemeColor.get(context).white
+                                : ThemeColor.get(context).black),
+                      ),
                       controller: ExpandedTileController(isExpanded: true),
                       content: CustomBulletedList(
                         listItems: recipe.ingredients!,
                         bulletColor: ThemeColor.get(context).green,
-                        style: defaultTextTheme.bodySmall!
-                            .copyWith(color: ThemeColor.get(context).black),
+                        style: defaultTextTheme.bodySmall!.copyWith(
+                            color: _isDarkMode
+                                ? ThemeColor.get(context).white
+                                : ThemeColor.get(context).black),
                       ),
                       leading: Image.network(
                         'https://res.cloudinary.com/stunt-shield-cloudinary/image/upload/v1690725073/Stunt%20Shield%20App%20Assets/ingredients_rimt3w.png',
                         height: 24.0,
                       ),
                       theme: ExpandedTileThemeData(
-                        headerColor: ThemeColor.get(context).white,
-                        contentBackgroundColor: ThemeColor.get(context).white,
+                        headerColor: _isDarkMode
+                            ? ThemeColor.get(context).dark200
+                            : ThemeColor.get(context).white,
+                        contentBackgroundColor: _isDarkMode
+                            ? ThemeColor.get(context).dark200
+                            : ThemeColor.get(context).white,
                         contentPadding: EdgeInsets.symmetric(
                             horizontal: 16.0, vertical: 0.0),
                         headerPadding: EdgeInsets.all(16.0),
@@ -194,6 +227,12 @@ class _FoodRecipeDetailPageState extends NyState<FoodRecipeDetailPage> {
                 Container(
                   padding: EdgeInsets.fromLTRB(20.0, 16.0, 20.0, 0),
                   child: Card(
+                    color: _isDarkMode
+                        ? ThemeColor.get(context).dark200
+                        : ThemeColor.get(context).white,
+                    surfaceTintColor: _isDarkMode
+                        ? ThemeColor.get(context).dark200
+                        : ThemeColor.get(context).white,
                     shape: RoundedRectangleBorder(
                       borderRadius:
                           BorderRadius.circular(8), // if you need this
@@ -205,23 +244,35 @@ class _FoodRecipeDetailPageState extends NyState<FoodRecipeDetailPage> {
                     elevation: 0,
                     child: ExpandedTile(
                       contentseparator: 0.0,
-                      title: Text('Langkah - Langkah'),
+                      title: Text(
+                        'Langkah - Langkah',
+                        style: defaultTextTheme.bodyMedium!.copyWith(
+                            color: _isDarkMode
+                                ? ThemeColor.get(context).white
+                                : ThemeColor.get(context).black),
+                      ),
                       controller: ExpandedTileController(isExpanded: false),
                       content: CustomBulletedList(
                         listItems: recipe.steps!,
                         bulletType: BulletType.numbered,
                         bulletColor: ThemeColor.get(context).yellow,
                         numberColor: ThemeColor.get(context).black,
-                        style: defaultTextTheme.bodySmall!
-                            .copyWith(color: ThemeColor.get(context).black),
+                        style: defaultTextTheme.bodySmall!.copyWith(
+                            color: _isDarkMode
+                                ? ThemeColor.get(context).white
+                                : ThemeColor.get(context).black),
                       ),
                       leading: Image.network(
                         'https://res.cloudinary.com/stunt-shield-cloudinary/image/upload/v1690178822/Stunt%20Shield%20App%20Assets/process_w7rxk5.png',
                         height: 24.0,
                       ),
                       theme: ExpandedTileThemeData(
-                        headerColor: ThemeColor.get(context).white,
-                        contentBackgroundColor: ThemeColor.get(context).white,
+                        headerColor: _isDarkMode
+                            ? ThemeColor.get(context).dark200
+                            : ThemeColor.get(context).white,
+                        contentBackgroundColor: _isDarkMode
+                            ? ThemeColor.get(context).dark200
+                            : ThemeColor.get(context).white,
                         contentPadding: EdgeInsets.symmetric(
                             horizontal: 16.0, vertical: 0.0),
                         headerPadding: EdgeInsets.all(16.0),
@@ -232,6 +283,12 @@ class _FoodRecipeDetailPageState extends NyState<FoodRecipeDetailPage> {
                 Container(
                   padding: EdgeInsets.fromLTRB(20.0, 16.0, 20.0, 0),
                   child: Card(
+                    color: _isDarkMode
+                        ? ThemeColor.get(context).dark200
+                        : ThemeColor.get(context).white,
+                    surfaceTintColor: _isDarkMode
+                        ? ThemeColor.get(context).dark200
+                        : ThemeColor.get(context).white,
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(8),
                       side: BorderSide(
@@ -242,7 +299,13 @@ class _FoodRecipeDetailPageState extends NyState<FoodRecipeDetailPage> {
                     elevation: 0,
                     child: ExpandedTile(
                       contentseparator: 0.0,
-                      title: Text('Informasi Nutrisi'),
+                      title: Text(
+                        'Informasi Nutrisi',
+                        style: defaultTextTheme.bodyMedium!.copyWith(
+                            color: _isDarkMode
+                                ? ThemeColor.get(context).white
+                                : ThemeColor.get(context).black),
+                      ),
                       controller: ExpandedTileController(isExpanded: true),
                       leading: Image.network(
                         'https://res.cloudinary.com/stunt-shield-cloudinary/image/upload/v1690725073/Stunt%20Shield%20App%20Assets/nutrition-facts-label_vduzec.png',
@@ -302,21 +365,29 @@ class _FoodRecipeDetailPageState extends NyState<FoodRecipeDetailPage> {
                           Text(
                             '*Komposisi gizi dihitung per ${recipe.large_portion}',
                             style: defaultTextTheme.labelSmall!.copyWith(
-                              color: ThemeColor.get(context).grey600,
+                              color: _isDarkMode
+                                  ? ThemeColor.get(context).grey300
+                                  : ThemeColor.get(context).grey600,
                             ),
                           ),
                           Text(
                             'sumber: ${recipe.nutrition_info_source}',
                             style: defaultTextTheme.labelSmall!.copyWith(
-                              color: ThemeColor.get(context).grey600,
+                              color: _isDarkMode
+                                  ? ThemeColor.get(context).grey300
+                                  : ThemeColor.get(context).grey600,
                             ),
                           ),
                           SizedBox(height: 16.0)
                         ],
                       ),
                       theme: ExpandedTileThemeData(
-                        headerColor: ThemeColor.get(context).white,
-                        contentBackgroundColor: ThemeColor.get(context).white,
+                        headerColor: _isDarkMode
+                            ? ThemeColor.get(context).dark200
+                            : ThemeColor.get(context).white,
+                        contentBackgroundColor: _isDarkMode
+                            ? ThemeColor.get(context).dark200
+                            : ThemeColor.get(context).white,
                         contentPadding: EdgeInsets.symmetric(
                             horizontal: 16.0, vertical: 0.0),
                         headerPadding: EdgeInsets.all(16.0),
