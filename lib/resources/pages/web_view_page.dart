@@ -17,9 +17,26 @@ class WebViewPage extends NyStatefulWidget {
 }
 
 class _WebViewPageState extends NyState<WebViewPage> {
+  WebViewController controller = WebViewController();
   @override
   init() async {
     super.init();
+    WebViewTarget data = widget.data();
+    controller = WebViewController()
+      ..setJavaScriptMode(JavaScriptMode.unrestricted)
+      ..setBackgroundColor(const Color(0x00000000))
+      ..setNavigationDelegate(
+        NavigationDelegate(
+          onWebResourceError: (WebResourceError error) {},
+          onNavigationRequest: (NavigationRequest request) {
+            if (request.url.startsWith('https://www.youtube.com/')) {
+              return NavigationDecision.prevent;
+            }
+            return NavigationDecision.navigate;
+          },
+        ),
+      )
+      ..loadRequest(Uri.parse(data.url!));
   }
 
   @override
@@ -30,7 +47,6 @@ class _WebViewPageState extends NyState<WebViewPage> {
   @override
   Widget build(BuildContext context) {
     WebViewTarget data = widget.data();
-    final controller = WebViewController()..loadRequest(Uri.parse(data.url!));
     return Scaffold(
       appBar: AppBar(
         title: Text(data.name!),
@@ -44,9 +60,7 @@ class _WebViewPageState extends NyState<WebViewPage> {
           },
         ),
       ),
-      body: WebViewWidget(
-        controller: controller,
-      ),
+      body: WebViewWidget(controller: controller),
     );
   }
 }
