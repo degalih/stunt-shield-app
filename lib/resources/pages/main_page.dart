@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:stunt_shield_app/resources/widgets/bookmark_recipe_widget.dart';
+import 'package:stunt_shield_app/resources/widgets/education_widget.dart';
 import 'package:stunt_shield_app/resources/widgets/food_recipe_widget.dart';
 import 'package:stunt_shield_app/resources/widgets/nutrition_calculator_widget.dart';
 import 'package:stunt_shield_app/resources/widgets/profile_widget.dart';
@@ -27,7 +27,7 @@ class _MainPageState extends NyState<MainPage> {
     FoodRecipe(),
     SearchRecipe(),
     NutritionCalculator(),
-    BookmarkRecipe(),
+    Education(),
     Profile(),
   ];
 

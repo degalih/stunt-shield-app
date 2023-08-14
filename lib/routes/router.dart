@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:stunt_shield_app/resources/pages/about_app_page.dart';
+import 'package:stunt_shield_app/resources/pages/bookmark_page.dart';
 import 'package:stunt_shield_app/resources/pages/contact_helper_page.dart';
 import 'package:stunt_shield_app/resources/pages/food_recipe_detail_page.dart';
 import 'package:stunt_shield_app/resources/pages/main_page.dart';
@@ -10,7 +11,6 @@ import 'package:stunt_shield_app/resources/pages/theme_setting_page.dart';
 import '/resources/pages/register_page.dart';
 import '/resources/pages/login_page.dart';
 import '/resources/pages/web_view_page.dart';
-
 import '/resources/pages/home_page.dart';
 import 'package:nylo_framework/nylo_framework.dart';
 
@@ -26,6 +26,7 @@ appRouter() => nyRoutes((router) async {
       router.route(RequestForgotPasswordPage.path,
           (context) => RequestForgotPasswordPage());
       router.route(AboutAppPage.path, (context) => AboutAppPage());
+      router.route(BookmarkPage.path, (context) => BookmarkPage());
       router.route(
         MainPage.path,
         (context) => MainPage(),

@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:stunt_shield_app/app/models/response/food_recipe_list.dart';
 import 'package:stunt_shield_app/app/networking/api_service.dart';
 import 'package:stunt_shield_app/bootstrap/helpers.dart';
+import 'package:stunt_shield_app/resources/pages/bookmark_page.dart';
 import 'package:stunt_shield_app/resources/pages/food_recipe_detail_page.dart';
 import 'package:stunt_shield_app/resources/themes/text_theme/default_text_theme.dart';
 import 'package:stunt_shield_app/resources/widgets/loader_widget.dart';
@@ -54,12 +56,33 @@ class _FoodRecipeState extends NyState<FoodRecipe> {
           slivers: [
             SliverAppBar(
               titleSpacing: 24,
-              title: Text(
-                'Mau Masak Apa Hari Ini?',
-                style: defaultTextTheme.titleLarge!.copyWith(
-                    color: _isDarkMode
-                        ? ThemeColor.get(context).white
-                        : ThemeColor.get(context).black),
+              title: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: <Widget>[
+                  Text(
+                    'Mau Masak Apa Hari Ini?',
+                    style: defaultTextTheme.titleLarge!.copyWith(
+                        color: _isDarkMode
+                            ? ThemeColor.get(context).white
+                            : ThemeColor.get(context).black),
+                  ),
+                  IconButton(
+                    padding: EdgeInsets.zero,
+                    onPressed: () {
+                      routeTo(BookmarkPage.path);
+                    },
+                    icon: SvgPicture.network(
+                      _isDarkMode
+                          ? "https://res.cloudinary.com/stunt-shield-cloudinary/image/upload/v1692022003/Stunt%20Shield%20App%20Assets/4_pljeva.svg"
+                          : 'https://res.cloudinary.com/stunt-shield-cloudinary/image/upload/v1692022003/Stunt%20Shield%20App%20Assets/3_cnnlji.svg',
+                      placeholderBuilder: (BuildContext context) => Container(
+                        height: 16,
+                        width: 16,
+                        child: const CircularProgressIndicator(),
+                      ),
+                    ),
+                  )
+                ],
               ),
               backgroundColor: _isDarkMode
                   ? ThemeColor.get(context).dark100
