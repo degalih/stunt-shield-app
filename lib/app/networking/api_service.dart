@@ -15,7 +15,15 @@ class ApiService extends BaseApiService {
   ApiService({BuildContext? buildContext}) : super(buildContext);
 
   @override
-  String get baseUrl => getEnv('API_BASE_URL');
+  BaseOptions get baseOptions => BaseOptions(
+        baseUrl: getEnv('API_BASE_URL'),
+        headers: {
+          "Content-type": "application/json",
+          "Accept": "application/json",
+        },
+        connectTimeout: Duration(seconds: 10),
+        receiveTimeout: Duration(seconds: 10),
+      );
 
   @override
   final interceptors = {
