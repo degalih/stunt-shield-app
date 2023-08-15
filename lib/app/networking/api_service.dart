@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:stunt_shield_app/app/models/poster.dart';
 import 'package:stunt_shield_app/app/models/response/favorite_id.dart';
 import 'package:stunt_shield_app/app/models/response/food_recipe_detail.dart';
 import 'package:stunt_shield_app/app/models/response/food_recipe_favorite.dart';
@@ -141,6 +142,11 @@ class ApiService extends BaseApiService {
     );
   }
 
+  Future<List<Poster>?> fetchPoster() async {
+    return await network<List<Poster>>(
+        request: (request) => request.get("/posters?populate=*"));
+  }
+
   displayError(DioException dioException, BuildContext context) {
     if (dioException.response != null) {
       showToastNotification(
@@ -157,7 +163,5 @@ class ApiService extends BaseApiService {
         style: ToastNotificationStyleType.DANGER,
       );
     }
-
-    // or display the error however you want
   }
 }
