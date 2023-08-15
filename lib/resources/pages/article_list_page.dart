@@ -3,6 +3,7 @@ import 'package:nylo_framework/nylo_framework.dart';
 import 'package:stunt_shield_app/app/networking/api_service.dart';
 import 'package:stunt_shield_app/app/utils/date_converter.dart';
 import 'package:stunt_shield_app/bootstrap/helpers.dart';
+import 'package:stunt_shield_app/resources/pages/article_detail_page.dart';
 import 'package:stunt_shield_app/resources/themes/text_theme/default_text_theme.dart';
 import 'package:stunt_shield_app/resources/widgets/custom_back_button_widget.dart';
 import '/app/controllers/controller.dart';
@@ -54,39 +55,45 @@ class _ArticleListPageState extends NyState<ArticleListPage> {
                             mainAxisSpacing: 8),
                         itemCount: data.length,
                         itemBuilder: (context, index) {
-                          return Card(
-                              surfaceTintColor: ThemeColor.get(context).white,
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                mainAxisSize: MainAxisSize.max,
-                                children: <Widget>[
-                                  AspectRatio(
-                                    aspectRatio: 16 / 9,
-                                    child: Image.network(
-                                      data[index].thumbnail ?? '-',
-                                      fit: BoxFit.cover,
+                          return GestureDetector(
+                            onTap: () {
+                              routeTo(ArticleDetailPage.path,
+                                  data: data[index]);
+                            },
+                            child: Card(
+                                surfaceTintColor: ThemeColor.get(context).white,
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  mainAxisSize: MainAxisSize.max,
+                                  children: <Widget>[
+                                    AspectRatio(
+                                      aspectRatio: 16 / 9,
+                                      child: Image.network(
+                                        data[index].thumbnail ?? '-',
+                                        fit: BoxFit.cover,
+                                      ),
                                     ),
-                                  ),
-                                  Padding(
-                                    padding: const EdgeInsets.all(8.0),
-                                    child: Text(
-                                      data[index].title ?? '-',
-                                      style: defaultTextTheme.bodySmall,
-                                      maxLines: 2,
-                                      overflow: TextOverflow.ellipsis,
+                                    Padding(
+                                      padding: const EdgeInsets.all(8.0),
+                                      child: Text(
+                                        data[index].title ?? '-',
+                                        style: defaultTextTheme.bodySmall,
+                                        maxLines: 2,
+                                        overflow: TextOverflow.ellipsis,
+                                      ),
                                     ),
-                                  ),
-                                  Padding(
-                                    padding: const EdgeInsets.symmetric(
-                                        horizontal: 8.0),
-                                    child: Text(
-                                      DateConverter.parseToID(
-                                          data[index].createdAt ?? '-'),
-                                      style: defaultTextTheme.labelSmall,
+                                    Padding(
+                                      padding: const EdgeInsets.symmetric(
+                                          horizontal: 8.0),
+                                      child: Text(
+                                        DateConverter.parseToID(
+                                            data[index].createdAt ?? '-'),
+                                        style: defaultTextTheme.labelSmall,
+                                      ),
                                     ),
-                                  ),
-                                ],
-                              ));
+                                  ],
+                                )),
+                          );
                         },
                       ),
                     )
