@@ -3,6 +3,7 @@ import 'package:full_screen_image/full_screen_image.dart';
 import 'package:nylo_framework/nylo_framework.dart';
 import 'package:stunt_shield_app/app/networking/api_service.dart';
 import 'package:stunt_shield_app/bootstrap/helpers.dart';
+import 'package:stunt_shield_app/resources/pages/infographic_list_page.dart';
 import 'package:stunt_shield_app/resources/themes/text_theme/default_text_theme.dart';
 import 'package:stunt_shield_app/app/models/infographic.dart' as Model;
 
@@ -47,7 +48,9 @@ class _InfographicState extends NyState<Infographic> {
                           color: ThemeColor.get(context).blue,
                           fontWeight: FontWeight.w600),
                     ),
-                    onPressed: () {},
+                    onPressed: () {
+                      routeTo(InfographicListPage.path);
+                    },
                   ),
                   leading: SizedBox(
                     width: 6,
