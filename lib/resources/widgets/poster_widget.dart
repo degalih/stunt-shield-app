@@ -31,6 +31,7 @@ class _PosterState extends NyState<Poster> {
           return Container(
             padding: EdgeInsets.symmetric(vertical: 8.0),
             child: Column(
+              mainAxisSize: MainAxisSize.min,
               children: <Widget>[
                 ListTile(
                   horizontalTitleGap: 0,
@@ -66,9 +67,9 @@ class _PosterState extends NyState<Poster> {
                       return FullScreenWidget(
                         backgroundColor: ThemeColor.get(context).white,
                         disposeLevel: DisposeLevel.Medium,
-                        child: Center(
-                          child: AspectRatio(
-                            aspectRatio: 320 / 180,
+                        child: AspectRatio(
+                          aspectRatio: 320 / 180,
+                          child: Center(
                             child: ClipRRect(
                               borderRadius:
                                   const BorderRadius.all(Radius.circular(8.0)),
