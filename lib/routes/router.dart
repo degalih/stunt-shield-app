@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:stunt_shield_app/resources/pages/about_app_page.dart';
 import 'package:stunt_shield_app/resources/pages/article_detail_page.dart';
+import 'package:stunt_shield_app/resources/pages/article_list_page.dart';
 import 'package:stunt_shield_app/resources/pages/bookmark_page.dart';
 import 'package:stunt_shield_app/resources/pages/contact_helper_page.dart';
 import 'package:stunt_shield_app/resources/pages/food_recipe_detail_page.dart';
@@ -33,6 +34,7 @@ appRouter() => nyRoutes((router) async {
       router.route(PosterListPage.path, (context) => PosterListPage());
       router.route(
           InfographicListPage.path, (context) => InfographicListPage());
+      router.route(ArticleListPage.path, (context) => ArticleListPage());
       router.route(ArticleDetailPage.path, (context) => ArticleDetailPage());
       router.route(
         MainPage.path,
