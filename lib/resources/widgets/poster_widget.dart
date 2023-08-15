@@ -91,6 +91,6 @@ class _PosterState extends NyState<Poster> {
   }
 
   Future<List<Model.Poster>?> _loadPoster() async {
-    return await api<ApiService>((request) => request.fetchPoster());
+    return await api<ApiService>((request) => request.fetchPoster(5));
   }
 }

@@ -88,6 +88,6 @@ class _ArticleState extends NyState<Article> {
   }
 
   Future<List<Model.Article>?> _loadArticle() async {
-    return await api<ApiService>((request) => request.fetchArticle());
+    return await api<ApiService>((request) => request.fetchArticle(3));
   }
 }

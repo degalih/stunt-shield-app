@@ -144,22 +144,22 @@ class ApiService extends BaseApiService {
     );
   }
 
-  Future<List<Poster>?> fetchPoster() async {
+  Future<List<Poster>?> fetchPoster(int limit) async {
     return await network<List<Poster>>(
         request: (request) => request.get(
-            "/posters?populate=*&pagination[pageSize]=5&sort=createdAt:desc"));
+            "/posters?populate=*&pagination[pageSize]=$limit&sort=createdAt:desc"));
   }
 
-  Future<List<Article>?> fetchArticle() async {
+  Future<List<Article>?> fetchArticle(int limit) async {
     return await network<List<Article>>(
         request: (request) => request.get(
-            "/articles?populate=*&pagination[pageSize]=3&sort=createdAt:desc"));
+            "/articles?populate=*&pagination[pageSize]=$limit&sort=createdAt:desc"));
   }
 
-  Future<List<Infographic>?> fetchInfoGraphic() async {
+  Future<List<Infographic>?> fetchInfoGraphic(int limit) async {
     return await network<List<Infographic>>(
         request: (request) => request.get(
-            "/info-graphics?populate=*&pagination[pageSize]=5&sort=createdAt:desc"));
+            "/info-graphics?populate=*&pagination[pageSize]=$limit&sort=createdAt:desc"));
   }
 
   displayError(DioException dioException, BuildContext context) {

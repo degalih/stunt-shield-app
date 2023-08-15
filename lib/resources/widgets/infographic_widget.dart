@@ -88,6 +88,6 @@ class _InfographicState extends NyState<Infographic> {
   }
 
   Future<List<Model.Infographic>?> _loadInfoGraphic() async {
-    return await api<ApiService>((request) => request.fetchInfoGraphic());
+    return await api<ApiService>((request) => request.fetchInfoGraphic(5));
   }
 }
