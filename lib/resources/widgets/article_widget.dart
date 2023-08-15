@@ -3,6 +3,7 @@ import 'package:nylo_framework/nylo_framework.dart';
 import 'package:stunt_shield_app/app/networking/api_service.dart';
 import 'package:stunt_shield_app/app/utils/date_converter.dart';
 import 'package:stunt_shield_app/bootstrap/helpers.dart';
+import 'package:stunt_shield_app/resources/pages/article_list_page.dart';
 import 'package:stunt_shield_app/resources/themes/text_theme/default_text_theme.dart';
 import 'package:stunt_shield_app/app/models/article.dart' as Model;
 
@@ -46,7 +47,9 @@ class _ArticleState extends NyState<Article> {
                           color: ThemeColor.get(context).green,
                           fontWeight: FontWeight.w600),
                     ),
-                    onPressed: () {},
+                    onPressed: () {
+                      routeTo(ArticleListPage.path);
+                    },
                   ),
                   leading: SizedBox(
                     width: 6,
