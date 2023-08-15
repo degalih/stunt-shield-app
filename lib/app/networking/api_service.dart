@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:stunt_shield_app/app/models/article.dart';
 import 'package:stunt_shield_app/app/models/poster.dart';
 import 'package:stunt_shield_app/app/models/response/favorite_id.dart';
 import 'package:stunt_shield_app/app/models/response/food_recipe_detail.dart';
@@ -146,6 +147,12 @@ class ApiService extends BaseApiService {
     return await network<List<Poster>>(
         request: (request) => request.get(
             "/posters?populate=*&pagination[pageSize]=5&sort=createdAt:desc"));
+  }
+
+  Future<List<Article>?> fetchArticle() async {
+    return await network<List<Article>>(
+        request: (request) => request.get(
+            "/articles?populate=*&pagination[pageSize]=3&sort=createdAt:desc"));
   }
 
   displayError(DioException dioException, BuildContext context) {
