@@ -15,6 +15,8 @@ class Poster extends StatefulWidget {
 }
 
 class _PosterState extends NyState<Poster> {
+  bool _isDarkMode = Backpack.instance.read('isDarkmode') ?? false;
+
   @override
   init() async {
     super.init();
@@ -34,7 +36,9 @@ class _PosterState extends NyState<Poster> {
                   horizontalTitleGap: 0,
                   title: Text('Poster',
                       style: defaultTextTheme.titleSmall!.copyWith(
-                          color: ThemeColor.get(context).grey800,
+                          color: _isDarkMode
+                              ? ThemeColor.get(context).white
+                              : ThemeColor.get(context).grey800,
                           fontWeight: FontWeight.w600)),
                   trailing: TextButton(
                     child: Text(
@@ -60,6 +64,7 @@ class _PosterState extends NyState<Poster> {
                   items: data.map((poster) {
                     return Builder(builder: (BuildContext context) {
                       return FullScreenWidget(
+                        backgroundColor: ThemeColor.get(context).white,
                         disposeLevel: DisposeLevel.Medium,
                         child: Center(
                           child: ClipRRect(
