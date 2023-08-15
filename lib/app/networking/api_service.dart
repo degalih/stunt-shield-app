@@ -144,7 +144,8 @@ class ApiService extends BaseApiService {
 
   Future<List<Poster>?> fetchPoster() async {
     return await network<List<Poster>>(
-        request: (request) => request.get("/posters?populate=*"));
+        request: (request) => request.get(
+            "/posters?populate=*&pagination[pageSize]=5&sort=createdAt:desc"));
   }
 
   displayError(DioException dioException, BuildContext context) {
