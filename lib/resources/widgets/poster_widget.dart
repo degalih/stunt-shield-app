@@ -67,13 +67,15 @@ class _PosterState extends NyState<Poster> {
                         backgroundColor: ThemeColor.get(context).white,
                         disposeLevel: DisposeLevel.Medium,
                         child: Center(
-                          child: ClipRRect(
-                            borderRadius:
-                                const BorderRadius.all(Radius.circular(8.0)),
-                            child: Image.network(
-                              poster.thumbnail ?? '-',
-                              fit: BoxFit.cover,
-                              width: double.infinity,
+                          child: AspectRatio(
+                            aspectRatio: 320 / 180,
+                            child: ClipRRect(
+                              borderRadius:
+                                  const BorderRadius.all(Radius.circular(8.0)),
+                              child: Image.network(
+                                poster.thumbnail ?? '-',
+                                fit: BoxFit.cover,
+                              ),
                             ),
                           ),
                         ),
