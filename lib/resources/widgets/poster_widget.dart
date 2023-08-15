@@ -4,6 +4,7 @@ import 'package:full_screen_image/full_screen_image.dart';
 import 'package:nylo_framework/nylo_framework.dart';
 import 'package:stunt_shield_app/app/networking/api_service.dart';
 import 'package:stunt_shield_app/bootstrap/helpers.dart';
+import 'package:stunt_shield_app/resources/pages/poster_list_page.dart';
 import 'package:stunt_shield_app/resources/themes/text_theme/default_text_theme.dart';
 import 'package:stunt_shield_app/app/models/poster.dart' as Model;
 
@@ -48,7 +49,9 @@ class _PosterState extends NyState<Poster> {
                           color: ThemeColor.get(context).yellow,
                           fontWeight: FontWeight.w600),
                     ),
-                    onPressed: () {},
+                    onPressed: () {
+                      routeTo(PosterListPage.path);
+                    },
                   ),
                   leading: SizedBox(
                     width: 6,
