@@ -1,4 +1,5 @@
 import 'package:stunt_shield_app/app/models/article.dart';
+import 'package:stunt_shield_app/app/models/infographic.dart';
 import 'package:stunt_shield_app/app/models/poster.dart';
 import 'package:stunt_shield_app/app/models/response/favorite_id.dart';
 import 'package:stunt_shield_app/app/models/response/food_recipe_favorite.dart';
@@ -26,9 +27,8 @@ final Map<Type, dynamic> modelDecoders = {
       List<Poster>.from(data["data"].map((x) => Poster.fromJson(x))),
   List<Article>: (data) =>
       List<Article>.from(data["data"].map((x) => Article.fromJson(x))),
-
-  // List<Infographic>: (data) =>
-  //     List.from(data).map((json) => Infographic.fromJson(json)).toList(),
+  List<Infographic>: (data) =>
+      List<Infographic>.from(data["data"].map((x) => Infographic.fromJson(x))),
 };
 
 final Map<Type, BaseApiService> apiDecoders = {
