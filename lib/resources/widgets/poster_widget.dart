@@ -1,5 +1,6 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
+import 'package:full_screen_image/full_screen_image.dart';
 import 'package:nylo_framework/nylo_framework.dart';
 import 'package:stunt_shield_app/app/networking/api_service.dart';
 import 'package:stunt_shield_app/bootstrap/helpers.dart';
@@ -58,13 +59,12 @@ class _PosterState extends NyState<Poster> {
                       CarouselOptions(autoPlay: true, enlargeCenterPage: true),
                   items: data.map((poster) {
                     return Builder(builder: (BuildContext context) {
-                      return Card(
-                        surfaceTintColor: ThemeColor.get(context).white,
-                        child: Padding(
-                          padding: const EdgeInsets.all(8.0),
+                      return FullScreenWidget(
+                        disposeLevel: DisposeLevel.Medium,
+                        child: Center(
                           child: ClipRRect(
                             borderRadius:
-                                const BorderRadius.all(Radius.circular(10)),
+                                const BorderRadius.all(Radius.circular(8.0)),
                             child: Image.network(
                               poster.thumbnail ?? '-',
                               fit: BoxFit.cover,
