@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:nylo_framework/nylo_framework.dart';
 
 // ignore: must_be_immutable
@@ -68,7 +69,7 @@ class AppBuild extends StatelessWidget {
           child: ValueListenableBuilder(
             valueListenable:
                 ValueNotifier(locale ?? NyLocalization.instance.locale),
-            builder: (context, Locale locale, _) => MaterialApp(
+            builder: (context, Locale locale, _) => GetMaterialApp(
               navigatorKey: navigatorKey,
               themeMode: themeMode,
               onGenerateTitle: onGenerateTitle,

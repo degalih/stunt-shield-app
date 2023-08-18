@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:stunt_shield_app/app/utils/dependency_injection.dart';
 import '/bootstrap/app.dart';
 import 'package:nylo_framework/nylo_framework.dart';
 import 'bootstrap/boot.dart';
 
-void main() async {
+Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   Nylo nylo = await Nylo.init(setup: Boot.nylo, setupFinished: Boot.finished);
   bool _isDarkMode = Backpack.instance.read('isDarkmode') ?? false;
@@ -16,4 +17,5 @@ void main() async {
       themeMode: _isDarkMode ? ThemeMode.dark : ThemeMode.light,
     ),
   );
+  DependencyInjection.init();
 }
