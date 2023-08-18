@@ -9,6 +9,7 @@ import 'package:stunt_shield_app/app/models/response/food_recipe_list.dart';
 import 'package:stunt_shield_app/app/models/response/food_recipe_search_result.dart';
 import 'package:stunt_shield_app/app/models/response/profile_me.dart';
 import 'package:stunt_shield_app/app/models/user.dart';
+import 'package:stunt_shield_app/app/networking/dio/interceptors/RetryOnServerInterceptor.dart';
 import 'package:stunt_shield_app/app/networking/dio/interceptors/bearer_auth_interceptor.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 import '../../app/networking/dio/base_api_service.dart';
@@ -31,7 +32,8 @@ class ApiService extends BaseApiService {
   @override
   final interceptors = {
     if (getEnv('APP_DEBUG') == true) PrettyDioLogger: PrettyDioLogger(),
-    BearerAuthInterceptor: BearerAuthInterceptor()
+    BearerAuthInterceptor: BearerAuthInterceptor(),
+    RetryOnServerErrorInterceptor: RetryOnServerErrorInterceptor(maxRetries: 3),
   };
 
   Future<User?> fetchUser(String identifier, String password) async {
