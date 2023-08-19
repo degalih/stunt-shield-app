@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:showcaseview/showcaseview.dart';
 import 'package:stunt_shield_app/resources/pages/about_app_page.dart';
 import 'package:stunt_shield_app/resources/pages/article_detail_page.dart';
 import 'package:stunt_shield_app/resources/pages/article_list_page.dart';
@@ -38,7 +39,13 @@ appRouter() => nyRoutes((router) async {
       router.route(ArticleDetailPage.path, (context) => ArticleDetailPage());
       router.route(
         MainPage.path,
-        (context) => MainPage(),
+        (context) => ShowCaseWidget(
+          builder: Builder(
+            builder: (context) {
+              return MainPage();
+            },
+          ),
+        ),
         routeGuards: [AuthRouteGuard()],
         authPage: true,
       );
