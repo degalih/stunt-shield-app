@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_app/app/models/response/food_recipe_list.dart';
-import 'package:flutter_app/app/networking/api_service.dart';
-import 'package:flutter_app/bootstrap/helpers.dart';
-import 'package:flutter_app/resources/pages/food_recipe_detail_page.dart';
-import 'package:flutter_app/resources/themes/text_theme/default_text_theme.dart';
-import 'package:flutter_app/resources/widgets/loader_widget.dart';
+import 'package:flutter_svg/flutter_svg.dart';
+import 'package:stunt_shield_app/app/models/response/food_recipe_list.dart';
+import 'package:stunt_shield_app/app/networking/api_service.dart';
+import 'package:stunt_shield_app/bootstrap/helpers.dart';
+import 'package:stunt_shield_app/resources/pages/bookmark_page.dart';
+import 'package:stunt_shield_app/resources/pages/food_recipe_detail_page.dart';
+import 'package:stunt_shield_app/resources/themes/text_theme/default_text_theme.dart';
+import 'package:stunt_shield_app/resources/widgets/loader_widget.dart';
 import 'package:lottie/lottie.dart';
 import 'package:nylo_framework/nylo_framework.dart';
 
@@ -16,6 +18,8 @@ class FoodRecipe extends StatefulWidget {
 }
 
 class _FoodRecipeState extends NyState<FoodRecipe> {
+  bool _isDarkMode = Backpack.instance.read('isDarkmode') ?? false;
+
   final _scrollController = ScrollController();
   int page = 1;
   bool hasMore = true;
@@ -44,18 +48,45 @@ class _FoodRecipeState extends NyState<FoodRecipe> {
     return RefreshIndicator(
       onRefresh: _refreshRecipes,
       child: Container(
-        color: ThemeColor.get(context).grey50,
+        color: _isDarkMode
+            ? ThemeColor.get(context).dark100
+            : ThemeColor.get(context).grey50,
         child: CustomScrollView(
           controller: _scrollController,
           slivers: [
             SliverAppBar(
               titleSpacing: 24,
-              title: Text(
-                'Mau Masak Apa Hari Ini?',
-                style: defaultTextTheme.titleLarge!
-                    .copyWith(color: ThemeColor.get(context).black),
+              title: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: <Widget>[
+                  Text(
+                    'Mau Masak Apa Hari Ini?',
+                    style: defaultTextTheme.titleLarge!.copyWith(
+                        color: _isDarkMode
+                            ? ThemeColor.get(context).white
+                            : ThemeColor.get(context).black),
+                  ),
+                  IconButton(
+                    padding: EdgeInsets.zero,
+                    onPressed: () {
+                      routeTo(BookmarkPage.path);
+                    },
+                    icon: SvgPicture.network(
+                      _isDarkMode
+                          ? "https://res.cloudinary.com/stunt-shield-cloudinary/image/upload/v1692022003/Stunt%20Shield%20App%20Assets/4_pljeva.svg"
+                          : 'https://res.cloudinary.com/stunt-shield-cloudinary/image/upload/v1692022003/Stunt%20Shield%20App%20Assets/3_cnnlji.svg',
+                      placeholderBuilder: (BuildContext context) => Container(
+                        height: 16,
+                        width: 16,
+                        child: const CircularProgressIndicator(),
+                      ),
+                    ),
+                  )
+                ],
               ),
-              backgroundColor: ThemeColor.get(context).grey50,
+              backgroundColor: _isDarkMode
+                  ? ThemeColor.get(context).dark100
+                  : ThemeColor.get(context).grey50,
             ),
             SliverPadding(
               padding: EdgeInsets.symmetric(horizontal: 20.0),
@@ -75,8 +106,12 @@ class _FoodRecipeState extends NyState<FoodRecipe> {
                         routeTo(FoodRecipeDetailPage.path, data: recipe.id);
                       },
                       child: Card(
-                        color: ThemeColor.get(context).white,
-                        surfaceTintColor: ThemeColor.get(context).white,
+                        color: _isDarkMode
+                            ? ThemeColor.get(context).dark200
+                            : ThemeColor.get(context).white,
+                        surfaceTintColor: _isDarkMode
+                            ? ThemeColor.get(context).dark200
+                            : ThemeColor.get(context).white,
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: <Widget>[
@@ -134,7 +169,10 @@ class _FoodRecipeState extends NyState<FoodRecipe> {
                                   horizontal: 8.0, vertical: 4.0),
                               child: Text(
                                 recipe.name ?? '-',
-                                style: defaultTextTheme.bodySmall,
+                                style: defaultTextTheme.bodySmall!.copyWith(
+                                    color: _isDarkMode
+                                        ? ThemeColor.get(context).white
+                                        : ThemeColor.get(context).black),
                                 overflow: TextOverflow.ellipsis,
                                 maxLines: 2,
                               ),
@@ -157,8 +195,11 @@ class _FoodRecipeState extends NyState<FoodRecipe> {
                                         style: defaultTextTheme.labelSmall!
                                             .copyWith(
                                                 fontWeight: FontWeight.w600,
-                                                color: ThemeColor.get(context)
-                                                    .grey700),
+                                                color: _isDarkMode
+                                                    ? ThemeColor.get(context)
+                                                        .grey300
+                                                    : ThemeColor.get(context)
+                                                        .grey700),
                                       )
                                     ],
                                   ),
@@ -173,8 +214,11 @@ class _FoodRecipeState extends NyState<FoodRecipe> {
                                         style: defaultTextTheme.labelSmall!
                                             .copyWith(
                                                 fontWeight: FontWeight.w600,
-                                                color: ThemeColor.get(context)
-                                                    .grey700),
+                                                color: _isDarkMode
+                                                    ? ThemeColor.get(context)
+                                                        .grey300
+                                                    : ThemeColor.get(context)
+                                                        .grey700),
                                       )
                                     ],
                                   ),
@@ -189,8 +233,11 @@ class _FoodRecipeState extends NyState<FoodRecipe> {
                                         style: defaultTextTheme.labelSmall!
                                             .copyWith(
                                                 fontWeight: FontWeight.w600,
-                                                color: ThemeColor.get(context)
-                                                    .grey700),
+                                                color: _isDarkMode
+                                                    ? ThemeColor.get(context)
+                                                        .grey300
+                                                    : ThemeColor.get(context)
+                                                        .grey700),
                                       )
                                     ],
                                   ),
@@ -205,8 +252,11 @@ class _FoodRecipeState extends NyState<FoodRecipe> {
                                         style: defaultTextTheme.labelSmall!
                                             .copyWith(
                                                 fontWeight: FontWeight.w600,
-                                                color: ThemeColor.get(context)
-                                                    .grey700),
+                                                color: _isDarkMode
+                                                    ? ThemeColor.get(context)
+                                                        .grey300
+                                                    : ThemeColor.get(context)
+                                                        .grey700),
                                       )
                                     ],
                                   ),

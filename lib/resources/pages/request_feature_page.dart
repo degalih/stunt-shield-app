@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_app/bootstrap/helpers.dart';
-import 'package:flutter_app/resources/themes/text_theme/default_text_theme.dart';
-import 'package:flutter_app/resources/widgets/custom_scaffold_widget.dart';
+import 'package:stunt_shield_app/bootstrap/helpers.dart';
+import 'package:stunt_shield_app/resources/themes/text_theme/default_text_theme.dart';
+import 'package:stunt_shield_app/resources/widgets/custom_scaffold_widget.dart';
 import 'package:nylo_framework/nylo_framework.dart';
 import '/app/controllers/controller.dart';
 
@@ -17,6 +17,8 @@ class RequestFeaturePage extends NyStatefulWidget {
 }
 
 class _RequestFeaturePageState extends NyState<RequestFeaturePage> {
+  bool _isDarkMode = Backpack.instance.read('isDarkmode') ?? false;
+
   @override
   init() async {
     super.init();
@@ -37,8 +39,10 @@ class _RequestFeaturePageState extends NyState<RequestFeaturePage> {
           Text(
             'Kirimkan permintaan fitur dengan mengirimkan email berupa kritik atau saran untuk aplikasi yang lebih baik di masa mendatang.',
             textAlign: TextAlign.justify,
-            style: defaultTextTheme.bodySmall!
-                .copyWith(color: ThemeColor.get(context).grey600),
+            style: defaultTextTheme.bodySmall!.copyWith(
+                color: _isDarkMode
+                    ? ThemeColor.get(context).grey300
+                    : ThemeColor.get(context).grey600),
           ),
           ListTile(
             horizontalTitleGap: 8,
@@ -46,12 +50,16 @@ class _RequestFeaturePageState extends NyState<RequestFeaturePage> {
             contentPadding: EdgeInsets.zero,
             leading: Icon(
               Icons.email_outlined,
-              color: ThemeColor.get(context).grey600,
+              color: _isDarkMode
+                  ? ThemeColor.get(context).grey300
+                  : ThemeColor.get(context).grey600,
             ),
             title: Text(
               'stuntshield@gmail.com',
-              style: defaultTextTheme.bodySmall!
-                  .copyWith(color: ThemeColor.get(context).grey600),
+              style: defaultTextTheme.bodySmall!.copyWith(
+                  color: _isDarkMode
+                      ? ThemeColor.get(context).grey300
+                      : ThemeColor.get(context).grey600),
             ),
           ),
         ],

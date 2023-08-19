@@ -1,16 +1,21 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_app/resources/pages/about_app_page.dart';
-import 'package:flutter_app/resources/pages/contact_helper_page.dart';
-import 'package:flutter_app/resources/pages/food_recipe_detail_page.dart';
-import 'package:flutter_app/resources/pages/main_page.dart';
-import 'package:flutter_app/resources/pages/change_password_page.dart';
-import 'package:flutter_app/resources/pages/request_feature_page.dart';
-import 'package:flutter_app/resources/pages/request_forgot_password_page.dart';
-import 'package:flutter_app/resources/pages/theme_setting_page.dart';
+import 'package:showcaseview/showcaseview.dart';
+import 'package:stunt_shield_app/resources/pages/about_app_page.dart';
+import 'package:stunt_shield_app/resources/pages/article_detail_page.dart';
+import 'package:stunt_shield_app/resources/pages/article_list_page.dart';
+import 'package:stunt_shield_app/resources/pages/bookmark_page.dart';
+import 'package:stunt_shield_app/resources/pages/contact_helper_page.dart';
+import 'package:stunt_shield_app/resources/pages/food_recipe_detail_page.dart';
+import 'package:stunt_shield_app/resources/pages/infographic_list_page.dart';
+import 'package:stunt_shield_app/resources/pages/main_page.dart';
+import 'package:stunt_shield_app/resources/pages/change_password_page.dart';
+import 'package:stunt_shield_app/resources/pages/poster_list_page.dart';
+import 'package:stunt_shield_app/resources/pages/request_feature_page.dart';
+import 'package:stunt_shield_app/resources/pages/request_forgot_password_page.dart';
+import 'package:stunt_shield_app/resources/pages/theme_setting_page.dart';
 import '/resources/pages/register_page.dart';
 import '/resources/pages/login_page.dart';
 import '/resources/pages/web_view_page.dart';
-
 import '/resources/pages/home_page.dart';
 import 'package:nylo_framework/nylo_framework.dart';
 
@@ -26,9 +31,21 @@ appRouter() => nyRoutes((router) async {
       router.route(RequestForgotPasswordPage.path,
           (context) => RequestForgotPasswordPage());
       router.route(AboutAppPage.path, (context) => AboutAppPage());
+      router.route(BookmarkPage.path, (context) => BookmarkPage());
+      router.route(PosterListPage.path, (context) => PosterListPage());
+      router.route(
+          InfographicListPage.path, (context) => InfographicListPage());
+      router.route(ArticleListPage.path, (context) => ArticleListPage());
+      router.route(ArticleDetailPage.path, (context) => ArticleDetailPage());
       router.route(
         MainPage.path,
-        (context) => MainPage(),
+        (context) => ShowCaseWidget(
+          builder: Builder(
+            builder: (context) {
+              return MainPage();
+            },
+          ),
+        ),
         routeGuards: [AuthRouteGuard()],
         authPage: true,
       );

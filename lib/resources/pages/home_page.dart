@@ -1,13 +1,13 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_app/app/models/web_view_target.dart';
-import 'package:flutter_app/bootstrap/extensions.dart';
-import 'package:flutter_app/bootstrap/helpers.dart';
-import 'package:flutter_app/resources/pages/login_page.dart';
-import 'package:flutter_app/resources/pages/register_page.dart';
-import 'package:flutter_app/resources/pages/web_view_page.dart';
-import 'package:flutter_app/resources/themes/text_theme/default_text_theme.dart';
-import 'package:flutter_app/resources/widgets/logo_widget.dart';
+import 'package:stunt_shield_app/app/models/web_view_target.dart';
+import 'package:stunt_shield_app/bootstrap/extensions.dart';
+import 'package:stunt_shield_app/bootstrap/helpers.dart';
+import 'package:stunt_shield_app/resources/pages/login_page.dart';
+import 'package:stunt_shield_app/resources/pages/register_page.dart';
+import 'package:stunt_shield_app/resources/pages/web_view_page.dart';
+import 'package:stunt_shield_app/resources/themes/text_theme/default_text_theme.dart';
+import 'package:stunt_shield_app/resources/widgets/logo_widget.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import '/app/controllers/home_controller.dart';
 import '/resources/widgets/safearea_widget.dart';
@@ -45,9 +45,12 @@ class _HomePageState extends NyState<HomePage> {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
-                  Logo(),
+                  Logo(
+                    height: 190,
+                  ),
                   SvgPicture.network(
                     'https://res.cloudinary.com/stunt-shield-cloudinary/image/upload/v1687707417/Stunt%20Shield%20App%20Assets/toodler-ilus_moqji2.svg',
+                    height: 90.0,
                     placeholderBuilder: (BuildContext context) => Container(
                       padding: const EdgeInsets.all(30.0),
                       child: const CircularProgressIndicator(),
@@ -63,21 +66,21 @@ class _HomePageState extends NyState<HomePage> {
                           (color) =>
                               _darkMode == true ? color.grey50 : color.grey600),
                   SizedBox(height: 16.0),
+                  Text(
+                    'Kolaborasi',
+                    style: defaultTextTheme.bodySmall!
+                        .copyWith(color: ThemeColor.get(context).grey600),
+                  ),
                   RichText(
                     textAlign: TextAlign.center,
                     text: TextSpan(
                       style: defaultTextTheme.bodySmall,
                       children: [
-                        TextSpan(
-                          style:
-                              TextStyle(color: ThemeColor.get(context).grey600),
-                          text: 'Kolaborasi ',
-                        ),
                         WidgetSpan(
                           alignment: PlaceholderAlignment.middle,
                           child: Image.network(
                             'https://res.cloudinary.com/stunt-shield-cloudinary/image/upload/v1691175747/Stunt%20Shield%20App%20Assets/Logo_ITG_hgblyi.png',
-                            height: 24.0,
+                            height: 20.0,
                           ),
                         ),
                         TextSpan(
@@ -85,15 +88,24 @@ class _HomePageState extends NyState<HomePage> {
                               TextStyle(color: ThemeColor.get(context).grey600),
                           text: ' Institut Teknologi Garut',
                         ),
-                        TextSpan(
-                            style: TextStyle(
-                                color: ThemeColor.get(context).grey600),
-                            text: ' dengan '),
+                      ],
+                    ),
+                  ),
+                  Text(
+                    'dengan',
+                    style: defaultTextTheme.bodySmall!
+                        .copyWith(color: ThemeColor.get(context).grey600),
+                  ),
+                  RichText(
+                    textAlign: TextAlign.center,
+                    text: TextSpan(
+                      style: defaultTextTheme.bodySmall,
+                      children: [
                         WidgetSpan(
                           alignment: PlaceholderAlignment.middle,
                           child: Image.network(
                             'https://res.cloudinary.com/stunt-shield-cloudinary/image/upload/v1691175745/Stunt%20Shield%20App%20Assets/Logo_KICS_znhurt.jpg',
-                            height: 24.0,
+                            height: 20.0,
                           ),
                         ),
                         TextSpan(

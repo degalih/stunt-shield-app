@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_app/resources/themes/text_theme/default_text_theme.dart';
+import 'package:nylo_framework/nylo_framework.dart';
+import 'package:stunt_shield_app/bootstrap/helpers.dart';
+import 'package:stunt_shield_app/resources/themes/text_theme/default_text_theme.dart';
 
 class NutritionCardItem extends StatelessWidget {
   final String imgUrl;
@@ -11,6 +13,7 @@ class NutritionCardItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    bool _isDarkMode = Backpack.instance.read('isDarkmode') ?? false;
     return Expanded(
       child: ListTile(
         visualDensity: VisualDensity(vertical: -4.0),
@@ -23,7 +26,10 @@ class NutritionCardItem extends StatelessWidget {
         ),
         title: Text(
           nutrition,
-          style: defaultTextTheme.bodySmall,
+          style: defaultTextTheme.bodySmall!.copyWith(
+              color: _isDarkMode
+                  ? ThemeColor.get(context).white
+                  : ThemeColor.get(context).black),
         ),
       ),
     );

@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_app/app/models/response/profile_me.dart';
-import 'package:flutter_app/app/networking/api_service.dart';
-import 'package:flutter_app/bootstrap/helpers.dart';
-import 'package:flutter_app/resources/pages/about_app_page.dart';
-import 'package:flutter_app/resources/pages/change_password_page.dart';
-import 'package:flutter_app/resources/pages/contact_helper_page.dart';
-import 'package:flutter_app/resources/pages/home_page.dart';
-import 'package:flutter_app/resources/pages/request_feature_page.dart';
-import 'package:flutter_app/resources/pages/theme_setting_page.dart';
-import 'package:flutter_app/resources/themes/text_theme/default_text_theme.dart';
-import 'package:flutter_app/resources/widgets/profile_card_button_widget.dart';
+import 'package:stunt_shield_app/app/models/response/profile_me.dart';
+import 'package:stunt_shield_app/app/networking/api_service.dart';
+import 'package:stunt_shield_app/bootstrap/helpers.dart';
+import 'package:stunt_shield_app/resources/pages/about_app_page.dart';
+import 'package:stunt_shield_app/resources/pages/change_password_page.dart';
+import 'package:stunt_shield_app/resources/pages/contact_helper_page.dart';
+import 'package:stunt_shield_app/resources/pages/home_page.dart';
+import 'package:stunt_shield_app/resources/pages/request_feature_page.dart';
+import 'package:stunt_shield_app/resources/pages/theme_setting_page.dart';
+import 'package:stunt_shield_app/resources/themes/text_theme/default_text_theme.dart';
+import 'package:stunt_shield_app/resources/widgets/profile_card_button_widget.dart';
 import 'package:nylo_framework/nylo_framework.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 
@@ -31,8 +31,11 @@ class _ProfileState extends NyState<Profile> {
 
   @override
   Widget build(BuildContext context) {
+    bool _isDarkMode = Backpack.instance.read('isDarkmode') ?? false;
     return Scaffold(
-      backgroundColor: ThemeColor.get(context).grey100,
+      backgroundColor: _isDarkMode
+          ? ThemeColor.get(context).dark100
+          : ThemeColor.get(context).grey100,
       body: NyFutureBuilder(
           future: _fetchProfileData(),
           child: (context, data) {
@@ -42,7 +45,10 @@ class _ProfileState extends NyState<Profile> {
               children: <Widget>[
                 Text(
                   'Profil Saya',
-                  style: defaultTextTheme.titleLarge,
+                  style: defaultTextTheme.titleLarge!.copyWith(
+                      color: _isDarkMode
+                          ? ThemeColor.get(context).white
+                          : ThemeColor.get(context).black),
                 ),
                 SizedBox(height: 16.0),
                 Container(
@@ -54,9 +60,13 @@ class _ProfileState extends NyState<Profile> {
                       Container(
                         height: 0.2 * MediaQuery.of(context).size.height,
                         child: Card(
-                          surfaceTintColor: ThemeColor.get(context).white,
+                          surfaceTintColor: _isDarkMode
+                              ? ThemeColor.get(context).dark200
+                              : ThemeColor.get(context).white,
                           elevation: 8.0,
-                          color: ThemeColor.get(context).white,
+                          color: _isDarkMode
+                              ? ThemeColor.get(context).dark200
+                              : ThemeColor.get(context).white,
                           child: ListTile(
                             title: Center(
                               child: Padding(
@@ -73,8 +83,11 @@ class _ProfileState extends NyState<Profile> {
                                     Text('${profileMe.email}',
                                         style: defaultTextTheme.titleMedium!
                                             .copyWith(
-                                                color: ThemeColor.get(context)
-                                                    .grey600)),
+                                                color: _isDarkMode
+                                                    ? ThemeColor.get(context)
+                                                        .grey300
+                                                    : ThemeColor.get(context)
+                                                        .grey600)),
                                   ],
                                 ),
                               ),
@@ -128,7 +141,9 @@ class _ProfileState extends NyState<Profile> {
                   child: Text(
                     'Versi Aplikasi $appVersion',
                     style: defaultTextTheme.titleSmall!.copyWith(
-                        color: ThemeColor.get(context).grey600,
+                        color: _isDarkMode
+                            ? ThemeColor.get(context).grey300
+                            : ThemeColor.get(context).grey600,
                         fontWeight: FontWeight.bold),
                   ),
                 ),

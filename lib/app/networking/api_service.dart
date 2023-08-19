@@ -1,12 +1,16 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_app/app/models/response/favorite_id.dart';
-import 'package:flutter_app/app/models/response/food_recipe_detail.dart';
-import 'package:flutter_app/app/models/response/food_recipe_favorite.dart';
-import 'package:flutter_app/app/models/response/food_recipe_list.dart';
-import 'package:flutter_app/app/models/response/food_recipe_search_result.dart';
-import 'package:flutter_app/app/models/response/profile_me.dart';
-import 'package:flutter_app/app/models/user.dart';
-import 'package:flutter_app/app/networking/dio/interceptors/bearer_auth_interceptor.dart';
+import 'package:stunt_shield_app/app/models/article.dart';
+import 'package:stunt_shield_app/app/models/infographic.dart';
+import 'package:stunt_shield_app/app/models/poster.dart';
+import 'package:stunt_shield_app/app/models/response/favorite_id.dart';
+import 'package:stunt_shield_app/app/models/response/food_recipe_detail.dart';
+import 'package:stunt_shield_app/app/models/response/food_recipe_favorite.dart';
+import 'package:stunt_shield_app/app/models/response/food_recipe_list.dart';
+import 'package:stunt_shield_app/app/models/response/food_recipe_search_result.dart';
+import 'package:stunt_shield_app/app/models/response/profile_me.dart';
+import 'package:stunt_shield_app/app/models/user.dart';
+import 'package:stunt_shield_app/app/networking/dio/interceptors/RetryOnServerInterceptor.dart';
+import 'package:stunt_shield_app/app/networking/dio/interceptors/bearer_auth_interceptor.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 import '../../app/networking/dio/base_api_service.dart';
 import 'package:nylo_framework/nylo_framework.dart';
@@ -15,12 +19,21 @@ class ApiService extends BaseApiService {
   ApiService({BuildContext? buildContext}) : super(buildContext);
 
   @override
-  String get baseUrl => getEnv('API_BASE_URL');
+  BaseOptions get baseOptions => BaseOptions(
+        baseUrl: getEnv('API_BASE_URL'),
+        headers: {
+          "Content-type": "application/json",
+          "Accept": "application/json",
+        },
+        connectTimeout: Duration(seconds: 10),
+        receiveTimeout: Duration(seconds: 10),
+      );
 
   @override
   final interceptors = {
     if (getEnv('APP_DEBUG') == true) PrettyDioLogger: PrettyDioLogger(),
-    BearerAuthInterceptor: BearerAuthInterceptor()
+    BearerAuthInterceptor: BearerAuthInterceptor(),
+    RetryOnServerErrorInterceptor: RetryOnServerErrorInterceptor(maxRetries: 3),
   };
 
   Future<User?> fetchUser(String identifier, String password) async {
@@ -133,6 +146,24 @@ class ApiService extends BaseApiService {
     );
   }
 
+  Future<List<Poster>?> fetchPoster(int limit) async {
+    return await network<List<Poster>>(
+        request: (request) => request.get(
+            "/posters?populate=*&pagination[pageSize]=$limit&sort=createdAt:desc"));
+  }
+
+  Future<List<Article>?> fetchArticle(int limit) async {
+    return await network<List<Article>>(
+        request: (request) => request.get(
+            "/articles?populate=*&pagination[pageSize]=$limit&sort=createdAt:desc"));
+  }
+
+  Future<List<Infographic>?> fetchInfoGraphic(int limit) async {
+    return await network<List<Infographic>>(
+        request: (request) => request.get(
+            "/info-graphics?populate=*&pagination[pageSize]=$limit&sort=createdAt:desc"));
+  }
+
   displayError(DioException dioException, BuildContext context) {
     if (dioException.response != null) {
       showToastNotification(
@@ -149,7 +180,5 @@ class ApiService extends BaseApiService {
         style: ToastNotificationStyleType.DANGER,
       );
     }
-
-    // or display the error however you want
   }
 }
