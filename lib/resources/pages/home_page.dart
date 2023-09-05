@@ -116,6 +116,23 @@ class _HomePageState extends NyState<HomePage> {
                     ),
                   ),
                   SizedBox(height: 32.0),
+                  Card(
+                    surfaceTintColor: Colors.white,
+                    color: ThemeColor.get(context).yellow50,
+                    child: ListTile(
+                      horizontalTitleGap: 4.0,
+                      leading: Icon(
+                        Icons.info_rounded,
+                        color: ThemeColor.get(context).yellow800,
+                      ),
+                      title: Text(
+                        'Mohon maaf atas ketidaknyamanannya🙏. Dikarenakan migrasi server. Akun yang dibuat sebelum tanggal 1 September 2023 akan terhapus dari sistem. Silahkan logout dan registrasi ulang akun anda.',
+                        style: defaultTextTheme.labelSmall!
+                            .copyWith(color: ThemeColor.get(context).yellow900),
+                      ),
+                    ),
+                  ),
+                  SizedBox(height: 16.0),
                   ElevatedButton(
                     style: ElevatedButton.styleFrom(
                         elevation: 2.0,

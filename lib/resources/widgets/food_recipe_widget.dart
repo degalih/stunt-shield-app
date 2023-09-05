@@ -88,6 +88,30 @@ class _FoodRecipeState extends NyState<FoodRecipe> {
                   ? ThemeColor.get(context).dark100
                   : ThemeColor.get(context).grey50,
             ),
+            SliverFixedExtentList(
+              itemExtent: 100,
+              delegate: SliverChildListDelegate([
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 20.0),
+                  child: Card(
+                    surfaceTintColor: Colors.white,
+                    color: ThemeColor.get(context).yellow50,
+                    child: ListTile(
+                      horizontalTitleGap: 4.0,
+                      leading: Icon(
+                        Icons.info_rounded,
+                        color: ThemeColor.get(context).yellow800,
+                      ),
+                      title: Text(
+                        'Mohon maaf atas ketidaknyamanannya🙏. Dikarenakan migrasi server. Akun yang dibuat sebelum tanggal 1 September 2023 akan terhapus dari sistem. Logout dan silahkan registrasi ulang akun anda. ',
+                        style: defaultTextTheme.labelSmall!
+                            .copyWith(color: ThemeColor.get(context).yellow900),
+                      ),
+                    ),
+                  ),
+                ),
+              ]),
+            ),
             SliverPadding(
               padding: EdgeInsets.symmetric(horizontal: 20.0),
               sliver: SliverGrid.builder(
@@ -292,7 +316,7 @@ class _FoodRecipeState extends NyState<FoodRecipe> {
                   }
                 },
               ),
-            )
+            ),
           ],
         ),
       ),
