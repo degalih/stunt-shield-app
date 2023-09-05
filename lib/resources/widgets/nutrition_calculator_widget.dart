@@ -80,147 +80,150 @@ class _NutritionCalculatorState extends NyState<NutritionCalculator> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: Padding(
-        padding: const EdgeInsets.fromLTRB(20.0, 40.0, 20.0, 0),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: <Widget>[
-            Text(
-              'Kalkulator Gizi Stunting',
-              style: defaultTextTheme.titleLarge!.copyWith(
-                  color: _isDarkMode
-                      ? ThemeColor.get(context).white
-                      : ThemeColor.get(context).black),
-            ),
-            SizedBox(height: 16.0),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                CustomRadioButton('Laki-Laki', 1),
-                CustomRadioButton('Perempuan', 2),
-              ],
-            ),
-            SizedBox(height: 16.0),
-            Container(
-              padding: EdgeInsets.all(8.0),
-              decoration: ShapeDecoration(
-                shape: RoundedRectangleBorder(
-                  side: BorderSide(
-                      width: 1, color: ThemeColor.get(context).grey400),
-                  borderRadius: BorderRadius.circular(8),
-                ),
+    return SingleChildScrollView(
+      child: Container(
+        child: Padding(
+          padding: const EdgeInsets.fromLTRB(20.0, 40.0, 20.0, 0),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: <Widget>[
+              Text(
+                'Kalkulator Gizi Stunting',
+                style: defaultTextTheme.titleLarge!.copyWith(
+                    color: _isDarkMode
+                        ? ThemeColor.get(context).white
+                        : ThemeColor.get(context).black),
               ),
-              child: Column(
+              SizedBox(height: 16.0),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Text(
-                    'Panjang/Tinggi Badan (cm)',
-                    style: defaultTextTheme.bodySmall!.copyWith(
-                        color: _isDarkMode
-                            ? ThemeColor.get(context).white
-                            : ThemeColor.get(context).black),
-                  ),
-                  HorizontalPicker(
-                    minValue: 20,
-                    maxValue: 140,
-                    divisions: 120,
-                    activeItemTextColor: ThemeColor.get(context).green,
-                    passiveItemsTextColor: ThemeColor.get(context).grey400,
-                    backgroundColor: _isDarkMode
-                        ? ThemeColor.get(context).dark100
-                        : ThemeColor.get(context).white,
-                    height: 100,
-                    suffix: " cm",
-                    showCursor: false,
-                    onChanged: (value) {
-                      _currentHeight = value;
-                    },
-                  ),
+                  Expanded(child: CustomRadioButton('Laki-Laki', 1)),
+                  SizedBox(width: 8.0),
+                  Expanded(child: CustomRadioButton('Perempuan', 2)),
                 ],
               ),
-            ),
-            SizedBox(height: 16.0),
-            Container(
-              width: double.infinity,
-              padding: EdgeInsets.all(8.0),
-              decoration: ShapeDecoration(
-                shape: RoundedRectangleBorder(
-                  side: BorderSide(
-                      width: 1, color: ThemeColor.get(context).grey400),
-                  borderRadius: BorderRadius.circular(8),
-                ),
-              ),
-              child: Column(
-                children: [
-                  Text(
-                    'Umur (bulan)',
-                    style: defaultTextTheme.bodySmall,
+              SizedBox(height: 16.0),
+              Container(
+                padding: EdgeInsets.all(8.0),
+                decoration: ShapeDecoration(
+                  shape: RoundedRectangleBorder(
+                    side: BorderSide(
+                        width: 1, color: ThemeColor.get(context).grey400),
+                    borderRadius: BorderRadius.circular(8),
                   ),
-                  SizedBox(height: 8.0),
-                  NumberPicker(
-                      axis: Axis.horizontal,
-                      minValue: 0,
-                      maxValue: 60,
-                      itemHeight: 100,
-                      value: _currentAge,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(8),
-                        border:
-                            Border.all(color: ThemeColor.get(context).grey400),
-                      ),
-                      textStyle: defaultTextTheme.displayMedium!
-                          .copyWith(color: ThemeColor.get(context).grey400),
-                      selectedTextStyle: defaultTextTheme.displayMedium!
-                          .copyWith(color: ThemeColor.get(context).green),
+                ),
+                child: Column(
+                  children: [
+                    Text(
+                      'Panjang/Tinggi Badan (cm)',
+                      style: defaultTextTheme.bodySmall!.copyWith(
+                          color: _isDarkMode
+                              ? ThemeColor.get(context).white
+                              : ThemeColor.get(context).black),
+                    ),
+                    HorizontalPicker(
+                      minValue: 20,
+                      maxValue: 140,
+                      divisions: 120,
+                      activeItemTextColor: ThemeColor.get(context).green,
+                      passiveItemsTextColor: ThemeColor.get(context).grey400,
+                      backgroundColor: _isDarkMode
+                          ? ThemeColor.get(context).dark100
+                          : ThemeColor.get(context).white,
+                      height: 100,
+                      suffix: " cm",
+                      showCursor: false,
                       onChanged: (value) {
-                        setState(() => _currentAge = value);
-                      }),
-                ],
+                        _currentHeight = value;
+                      },
+                    ),
+                  ],
+                ),
               ),
-            ),
-            SizedBox(height: 16.0),
-            isLoading(name: 'loadCalculatorResult')
-                ? ElevatedButton.icon(
-                    icon: Container(
-                      width: 24,
-                      height: 24,
-                      padding: const EdgeInsets.all(2.0),
-                      child: const CircularProgressIndicator(
-                        color: Colors.white,
-                        strokeWidth: 3,
-                      ),
-                    ),
-                    style: ElevatedButton.styleFrom(
-                      elevation: 2.0,
-                      minimumSize: const Size.fromHeight(50),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(8.0),
-                      ),
-                    ),
-                    onPressed: () {},
-                    label: Text(
-                      'Loading...',
-                      style: defaultTextTheme.labelLarge,
-                    ),
-                  )
-                : ElevatedButton(
-                    style: ElevatedButton.styleFrom(
-                      elevation: 2.0,
-                      minimumSize: const Size.fromHeight(50),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(8.0),
-                      ),
-                    ),
-                    onPressed: () {
-                      _showCalculatorResult(context);
-                    },
-                    child: Text(
-                      'Hitung Status Gizi',
-                      style: defaultTextTheme.labelLarge,
-                    ),
+              SizedBox(height: 16.0),
+              Container(
+                width: double.infinity,
+                padding: EdgeInsets.all(8.0),
+                decoration: ShapeDecoration(
+                  shape: RoundedRectangleBorder(
+                    side: BorderSide(
+                        width: 1, color: ThemeColor.get(context).grey400),
+                    borderRadius: BorderRadius.circular(8),
                   ),
-          ],
+                ),
+                child: Column(
+                  children: [
+                    Text(
+                      'Umur (bulan)',
+                      style: defaultTextTheme.bodySmall,
+                    ),
+                    SizedBox(height: 8.0),
+                    NumberPicker(
+                        axis: Axis.horizontal,
+                        minValue: 0,
+                        maxValue: 60,
+                        itemHeight: 100,
+                        value: _currentAge,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(8),
+                          border: Border.all(
+                              color: ThemeColor.get(context).grey400),
+                        ),
+                        textStyle: defaultTextTheme.displayMedium!
+                            .copyWith(color: ThemeColor.get(context).grey400),
+                        selectedTextStyle: defaultTextTheme.displayMedium!
+                            .copyWith(color: ThemeColor.get(context).green),
+                        onChanged: (value) {
+                          setState(() => _currentAge = value);
+                        }),
+                  ],
+                ),
+              ),
+              SizedBox(height: 16.0),
+              isLoading(name: 'loadCalculatorResult')
+                  ? ElevatedButton.icon(
+                      icon: Container(
+                        width: 24,
+                        height: 24,
+                        padding: const EdgeInsets.all(2.0),
+                        child: const CircularProgressIndicator(
+                          color: Colors.white,
+                          strokeWidth: 3,
+                        ),
+                      ),
+                      style: ElevatedButton.styleFrom(
+                        elevation: 2.0,
+                        minimumSize: const Size.fromHeight(50),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(8.0),
+                        ),
+                      ),
+                      onPressed: () {},
+                      label: Text(
+                        'Loading...',
+                        style: defaultTextTheme.labelLarge,
+                      ),
+                    )
+                  : ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                        elevation: 2.0,
+                        minimumSize: const Size.fromHeight(50),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(8.0),
+                        ),
+                      ),
+                      onPressed: () {
+                        _showCalculatorResult(context);
+                      },
+                      child: Text(
+                        'Hitung Status Gizi',
+                        style: defaultTextTheme.labelLarge,
+                      ),
+                    ),
+            ],
+          ),
         ),
       ),
     );
